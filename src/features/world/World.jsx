@@ -1,6 +1,6 @@
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
-import { useTexture, Environment, Html, useProgress } from "@react-three/drei";
+import { useTexture, Environment, useProgress } from "@react-three/drei";
 import * as THREE from "three";
 import { Scenery } from "./Scenery.jsx";
 import { Journey } from "../journey/Journey.jsx";
@@ -57,43 +57,55 @@ const Atmosphere = ({ night }) => {
 const Loading = () => {
   const { progress } = useProgress();
   return (
-    <Html fullscreen>
-      <div className="loading">
-        <span className="loading-orbit">✦</span>
-        <b>L’archipel se prépare</b>
-        <span>{Math.round(progress)} % · Chargement des décors</span>
-      </div>
-    </Html>
+    <div className="loading" role="status">
+      <span className="loading-orbit">✦</span>
+      <b>L’archipel se prépare</b>
+      <span>{Math.round(progress)} % · Chargement des décors</span>
+    </div>
   );
 };
-export const World = (props) => (
-  <Canvas
-    shadows={{ type: THREE.PCFShadowMap }}
-    dpr={[1, 1.5]}
-    camera={{ position: [30, 24, 43], fov: 45, near: 0.1, far: 350 }}
-    gl={{
-      antialias: true,
-      powerPreference: "high-performance",
-      toneMapping: THREE.ACESFilmicToneMapping,
-      toneMappingExposure: 1.05,
-    }}
-    fallback={
-      <div className="canvas-fallback">
-        Archipel en 3D. Le carnet propose une version accessible des neuf
-        escales.
-      </div>
-    }
-  >
-    <Suspense fallback={<Loading />}>
-      <Atmosphere night={props.night} />
-      <Scenery
-        onExhibit={props.onExhibit}
-        islandId={props.islandId}
-        mode={props.mode}
-        reduced={props.reduced}
-        paused={props.paused}
-      />
-      <Journey {...props} />
-    </Suspense>
-  </Canvas>
-);
+const Ready = ({ onReady }) => {
+  useEffect(() => {
+    onReady(true);
+  }, [onReady]);
+  return null;
+};
+
+export const World = (props) => {
+  const [ready, setReady] = useState(false);
+  return (
+    <>
+      <Canvas
+        shadows={{ type: THREE.PCFShadowMap }}
+        dpr={[1, 1.5]}
+        camera={{ position: [30, 24, 43], fov: 45, near: 0.1, far: 350 }}
+        gl={{
+          antialias: true,
+          powerPreference: "high-performance",
+          toneMapping: THREE.ACESFilmicToneMapping,
+          toneMappingExposure: 1.05,
+        }}
+        fallback={
+          <div className="canvas-fallback">
+            Archipel en 3D. Le carnet propose une version accessible des neuf
+            escales.
+          </div>
+        }
+      >
+        <Suspense fallback={null}>
+          <Atmosphere night={props.night} />
+          <Scenery
+            onExhibit={props.onExhibit}
+            islandId={props.islandId}
+            mode={props.mode}
+            reduced={props.reduced}
+            paused={props.paused}
+          />
+          <Journey {...props} />
+          <Ready onReady={setReady} />
+        </Suspense>
+      </Canvas>
+      {!ready && <Loading />}
+    </>
+  );
+};

@@ -20,3 +20,5 @@ Implementation target: detailed Blender-authored reusable assets exported as GLB
 - Six tests and the production build pass. Physical gamepad/touch hardware and low-end device frame rates remain unverified. Exact concept-image fidelity and user visual acceptance are not claimed.
 
 Editable local source: `artifacts/blender/zeppelin-journey-v2.blend`. Browser proof is stored under ignored `artifacts/v2-*.png`. See `ASSETS.md` for asset provenance and `implementation.md` for remaining system limits.
+
+A post-publication check exposed a recoverable React `removeChild` error while the Drei HTML loading portal was being removed. The loader now lives in the ordinary DOM next to the canvas and remains visible until the scene has committed; the 3D Suspense boundary has no HTML portal fallback. This avoids competing portal cleanup during startup. The compact mobile overview was also reframed to keep the airship above the departure card.

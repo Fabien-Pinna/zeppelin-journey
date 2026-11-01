@@ -1051,18 +1051,18 @@ h1 em {
     right: 16px;
     bottom: 69px;
     max-width: none;
-    padding: 18px 20px;
+    padding: 14px 18px;
   }
   .intro-eyebrow {
     margin-bottom: 9px;
     font-size: 8px;
   }
   h1 {
-    font-size: 32px;
+    font-size: 28px;
   }
   .intro-copy p {
-    font-size: 11px;
-    margin: 9px 0 15px;
+    font-size: 10px;
+    margin: 6px 0 10px;
   }
   .intro-actions {
     gap: 10px;
@@ -1072,8 +1072,8 @@ h1 em {
     padding: 3px 0;
   }
   .start-button {
-    min-width: 195px;
-    font-size: 12px;
+    min-width: 0;
+    font-size: 11px;
   }
   .intro-copy .primary-button {
     padding: 11px 14px;

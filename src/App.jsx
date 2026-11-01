@@ -197,7 +197,7 @@ export const App = () => {
               Commencer le voyage <span>↗</span>
             </button>
             <button className="quiet-button" onClick={() => setJournal("all")}>
-              Ou feuilleter le carnet <span>→</span>
+              Lire le carnet <span>→</span>
             </button>
           </div>
         </section>
@@ -376,3 +376,4 @@ export const App = () => {
     </main>
   );
 };
+

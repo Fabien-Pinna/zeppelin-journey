@@ -197,7 +197,7 @@ export const Journey = ({
         camera.aspect < 1 ? 31 : 20,
         camera.aspect < 1 ? 58 : 36,
       );
-      vectors.look.set(-6, 2, -13);
+      vectors.look.set(camera.aspect < 1 ? 5 : -6, 2, camera.aspect < 1 ? 0 : -13);
     } else if (mode === "landing") {
       const dock = dockPosition(island),
         angle = input.current.orbit;

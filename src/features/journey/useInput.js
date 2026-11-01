@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { clampZoom } from "./physics.js";
+import { DEFAULT_WALK_PITCH } from './camera.js';
 
 /** Collect physical input without React updates in the animation loop. */
 export const useInput = (onAction, onTalk) => {
@@ -7,6 +8,7 @@ export const useInput = (onAction, onTalk) => {
     keys: new Set(),
     touch: { x: 0, y: 0 },
     orbit: 0,
+    pitch: DEFAULT_WALK_PITCH,
     zoom: 1,
     jump: false,
     action: onAction,

@@ -10,6 +10,7 @@ import {
 import { ErrorBoundary } from "react-error-boundary";
 import { Conversation } from "./components/Conversation.jsx";
 import { clampZoom } from "./features/journey/physics.js";
+import { clampWalkPitch, DEFAULT_WALK_PITCH } from './features/journey/camera.js';
 import { Journal } from "./components/Journal.jsx";
 import { TouchControls } from "./components/TouchControls.jsx";
 import { useInput } from "./features/journey/useInput.js";
@@ -109,8 +110,11 @@ export const App = () => {
       const distance = Math.hypot(a[0] - b[0], a[1] - b[1]);
       if (pinch.current && distance > 10) changeZoom(pinch.current / distance);
       pinch.current = distance;
-    } else if (!intro)
+    } else if (!intro) {
       input.current.orbit -= (event.clientX - previous[0]) * 0.006;
+      if (mode === 'walking')
+        input.current.pitch = clampWalkPitch(input.current.pitch - (event.clientY - previous[1]) * 0.0045);
+    }
   };
   const pointerUp = (event) => {
     drag.current.delete(event.pointerId);
@@ -191,6 +195,7 @@ export const App = () => {
           onClick={() => {
             input.current.zoom = 1;
             input.current.orbit = 0;
+            input.current.pitch = DEFAULT_WALK_PITCH;
           }}
           aria-label="Recentrer la caméra"
           title="Vue initiale"
@@ -417,8 +422,8 @@ export const App = () => {
           <dl>
             <dt>ZQSD / WASD / flèches</dt>
             <dd>Marcher · piloter</dd>
-            <dt>Glisser la souris</dt>
-            <dd>Regarder autour de soi</dd>
+            <dt>Glisser la souris ou le doigt</dt>
+            <dd>Tourner la caméra · à pied, glisser verticalement pour l’incliner</dd>
             <dt>Molette / + − / pincement</dt>
             <dd>Zoomer · dézoomer</dd>
             <dt>F</dt>

@@ -4,6 +4,7 @@ import * as THREE from "three";
 import { Avatar } from "./Avatar.jsx";
 import { Zeppelin } from "../world/Zeppelin.jsx";
 import { flightCameraOffset } from "./flight.js";
+import { clampWalkPitch, walkingCameraOffset } from './camera.js';
 import {
   moveWalker,
   deadZone,
@@ -104,6 +105,8 @@ export const Journey = ({
     if (action && !gamepadAction.current && !paused) actionRef.current?.();
     gamepadAction.current = action;
     if (!paused) input.current.orbit += deadZone(pad?.axes[2] || 0) * dt * 1.5;
+    if (!paused && mode === 'walking')
+      input.current.pitch = clampWalkPitch(input.current.pitch - deadZone(pad?.axes[3] || 0) * dt * 1.1);
     if (paused) {
       x = 0;
       y = 0;
@@ -241,13 +244,10 @@ export const Journey = ({
         camera.aspect < 1 ? 0 : -13,
       );
     } else if (mode === "walking") {
-      const angle = input.current.orbit;
-      vectors.camera.set(
-        walker.current.x + Math.sin(angle) * 14,
-        walker.current.y + 8,
-        walker.current.z + Math.cos(angle) * 14,
-      );
       vectors.look.copy(walker.current).add(vectors.target.set(0, 1.3, 0));
+      vectors.camera.copy(vectors.look).add(
+        vectors.target.set(...walkingCameraOffset(input.current.orbit, input.current.pitch)),
+      );
     } else {
       const orbit = flightOrbit.current;
       if (!paused) {

@@ -2,6 +2,21 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { flightCameraOffset, stepPropellers } from '../src/features/journey/flight.js';
 import { readFileSync } from 'node:fs';
+import { DEFAULT_WALK_PITCH, walkingCameraOffset } from '../src/features/journey/camera.js';
+
+test('walking camera resets to the original view and can rise or lower without changing zoom distance', () => {
+  const reset = walkingCameraOffset(0, DEFAULT_WALK_PITCH);
+  assert.ok(Math.abs(reset[1] - 6.7) < 1e-10);
+  assert.ok(Math.abs(reset[2] - 14) < 1e-10);
+  for (const yaw of [0, .7, Math.PI, -2]) {
+    const low = walkingCameraOffset(yaw, -100);
+    const high = walkingCameraOffset(yaw, 100);
+    assert.ok(low[1] > .8 && low[1] < reset[1]);
+    assert.ok(high[1] > 15);
+    assert.ok(Math.hypot(high[0], high[2]) > 3, 'never flips across the vertical pole');
+    assert.ok(Math.abs(Math.hypot(...low) - Math.hypot(...high)) < 1e-10);
+  }
+});
 
 test('chase camera stays behind the model nose for every heading and orbit limit', () => {
   for (let yaw = -Math.PI; yaw <= Math.PI; yaw += 0.13) {

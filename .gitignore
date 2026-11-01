@@ -5,3 +5,5 @@ dist/
 .openai/*.tar.gz
 artifacts/
 *.log
+__pycache__/
+*.blend1

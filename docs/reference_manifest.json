@@ -1,0 +1,17 @@
+{
+  "source_files": ["1.png", "2.png", "3.png"],
+  "classification": "Three complementary perspective concept illustrations, not orthographic views of one rigid object",
+  "primary_composition": "2.png: airship and boarding pier in foreground, lush career islands across a deep sky",
+  "scene_detail_reference": "1.png: architectural detail, individual stone courses, planks, planters, workshop furniture, theatrical dioramas",
+  "lighting_reference": "3.png: blue-hour sky against amber lanterns, luminous cabin, abundant flowers and vegetation",
+  "structural_parts": ["ornate zeppelin envelope and brass ribs", "glazed cabin and external propellers", "timber boarding piers", "irregular rocky islands", "distinct warehouse, masonry, farm, trapeze, circus, Backroads and coding scenes"],
+  "decorative_parts": ["tile courses", "stone masonry", "rope and railings", "lanterns", "window frames", "flowerbeds", "leafy trees", "vines", "tools and supplies", "background cloud sea"],
+  "validation_thresholds": {
+    "all_career_chapters_present": true,
+    "recognizable_silhouette_per_destination": true,
+    "wood_stone_brass_and_fabric_read_separately": true,
+    "no_faceted_blob_clouds": true,
+    "browser_screenshots_required": true,
+    "orthographic_iou": "not applicable to differing perspective concept scenes"
+  }
+}

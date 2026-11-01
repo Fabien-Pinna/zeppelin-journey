@@ -1,17 +1,99 @@
-import { Canvas } from '@react-three/fiber';
-import { Scenery } from './Scenery.jsx';
-import { Journey } from '../journey/Journey.jsx';
-
-/** Canvas boundary kept separate so the readable portfolio never needs WebGL. */
-export const World = (props) => <Canvas
-  shadows dpr={[1, 1.5]} camera={{ position: [34, 27, 43], fov: 46, near: 0.1, far: 220 }}
-  gl={{ antialias: true, powerPreference: 'high-performance' }}
-  fallback={<div className="canvas-fallback">La 3D n’est pas disponible sur cet appareil. Retrouvez toutes les escales dans le carnet de voyage.</div>}
->
-  <color attach="background" args={[props.night ? '#263e50' : '#bdd4d2']} />
-  <fog attach="fog" args={[props.night ? '#263e50' : '#bdd4d2', 65, 160]} />
-  <hemisphereLight args={[props.night ? '#a9b7df' : '#fff4dc', '#6b8075', props.night ? 1 : 1.3]} />
-  <directionalLight position={[-20, 35, 20]} intensity={props.night ? 1 : 2} color={props.night ? '#d3dcff' : '#ffe1af'} castShadow shadow-mapSize={[2048, 2048]} shadow-camera-left={-65} shadow-camera-right={65} shadow-camera-top={65} shadow-camera-bottom={-65} shadow-camera-far={120} shadow-bias={-0.001} />
-  <Scenery night={props.night} reduced={props.reduced} onExhibit={props.onExhibit} showLabels={props.mode !== 'overview'} />
-  <Journey {...props} />
-</Canvas>;
+import { Suspense, useEffect } from "react";
+import { Canvas, useThree } from "@react-three/fiber";
+import { useTexture, Environment, Html, useProgress } from "@react-three/drei";
+import * as THREE from "three";
+import { Scenery } from "./Scenery.jsx";
+import { Journey } from "../journey/Journey.jsx";
+const Atmosphere = ({ night }) => {
+  const skies = useTexture([
+    "/textures/cloud-sea.png",
+    "/textures/cloud-sea-evening.png",
+  ]);
+  const sky = skies[night ? 1 : 0];
+  const { scene, size } = useThree();
+  useEffect(() => {
+    sky.colorSpace = THREE.SRGBColorSpace;
+    const scale = Math.min(1, size.width / size.height / 2);
+    sky.repeat.set(scale, 1);
+    sky.offset.set((1 - scale) / 2, 0);
+    scene.background = sky;
+    return () => {
+      scene.background = null;
+    };
+  }, [scene, sky, size.width, size.height]);
+  return (
+    <>
+      <fog attach="fog" args={[night ? "#657b91" : "#d3d9c4", 90, 240]} />
+      <hemisphereLight
+        args={[night ? "#9eafda" : "#fff1d2", "#95a48e", night ? 0.9 : 1.8]}
+      />
+      <directionalLight
+        position={[-35, 55, 35]}
+        intensity={night ? 1 : 3}
+        color={night ? "#b4c5f5" : "#ffe0ad"}
+        castShadow
+        shadow-mapSize={[2048, 2048]}
+        shadow-camera-left={-60}
+        shadow-camera-right={60}
+        shadow-camera-top={60}
+        shadow-camera-bottom={-60}
+        shadow-camera-far={180}
+        shadow-normalBias={0.12}
+      />
+      <directionalLight
+        position={[30, 20, -30]}
+        intensity={night ? 0.6 : 1}
+        color="#c3e5ef"
+      />
+      <Environment resolution={64} frames={1} environmentIntensity={0.7}>
+        <mesh scale={100}>
+          <sphereGeometry args={[1, 16, 16]} />
+          <meshBasicMaterial color="#ddd4ba" side={THREE.BackSide} />
+        </mesh>
+      </Environment>
+    </>
+  );
+};
+const Loading = () => {
+  const { progress } = useProgress();
+  return (
+    <Html fullscreen>
+      <div className="loading">
+        <span className="loading-orbit">✦</span>
+        <b>L’archipel se prépare</b>
+        <span>{Math.round(progress)} % · Chargement des décors</span>
+      </div>
+    </Html>
+  );
+};
+export const World = (props) => (
+  <Canvas
+    shadows={{ type: THREE.PCFShadowMap }}
+    dpr={[1, 1.5]}
+    camera={{ position: [30, 24, 43], fov: 45, near: 0.1, far: 350 }}
+    gl={{
+      antialias: true,
+      powerPreference: "high-performance",
+      toneMapping: THREE.ACESFilmicToneMapping,
+      toneMappingExposure: 1.05,
+    }}
+    fallback={
+      <div className="canvas-fallback">
+        Archipel en 3D. Le carnet propose une version accessible des neuf
+        escales.
+      </div>
+    }
+  >
+    <Suspense fallback={<Loading />}>
+      <Atmosphere night={props.night} />
+      <Scenery
+        onExhibit={props.onExhibit}
+        islandId={props.islandId}
+        mode={props.mode}
+        reduced={props.reduced}
+        paused={props.paused}
+      />
+      <Journey {...props} />
+    </Suspense>
+  </Canvas>
+);

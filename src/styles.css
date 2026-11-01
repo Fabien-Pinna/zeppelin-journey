@@ -792,7 +792,7 @@ kbd {
     flex-direction: column;
   }
 }
-@media (pointer: coarse) {
+@media (pointer: coarse), (max-width: 760px) {
   .touch-pad {
     position: absolute;
     bottom: 165px;
@@ -1113,4 +1113,186 @@ h1 em {
   .world-label {
     font-size: 10px;
   }
+}
+.camera-controls {
+  position: absolute;
+  z-index: 25;
+  right: 28px;
+  top: 110px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 5px;
+  border: 1px solid #fff9;
+  border-radius: 30px;
+  background: #f7efdce8;
+  box-shadow: 0 5px 24px #35494b18;
+}
+.camera-controls button {
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #35565a;
+  font-size: 24px;
+  cursor: pointer;
+}
+.camera-controls button:hover {
+  background: #dbdfca;
+}
+.npc-label {
+  border: 1px solid #e1cc9b;
+  border-radius: 22px;
+  padding: 9px 15px;
+  background: #fff5dcf5;
+  box-shadow: 0 4px 15px #273b3520;
+  color: #345958;
+  font-size: 11px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.npc-label span {
+  color: #b47b3d;
+  margin-right: 5px;
+  letter-spacing: 2px;
+}
+.conversation {
+  width: min(590px, calc(100vw - 32px));
+  max-height: calc(100dvh - 36px);
+  border: 1px solid #e3d2ad;
+  border-radius: 22px;
+  padding: 0;
+  background: #fbf5e8;
+  color: #344f50;
+  box-shadow: 0 24px 100px #163a4050;
+}
+.conversation::backdrop {
+  background: #183a3f65;
+  backdrop-filter: blur(5px);
+}
+.conversation-inner {
+  padding: 28px 32px;
+}
+.conversation header,
+.conversation footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+}
+.speaker {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin: 18px 0;
+}
+.speaker-icon {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  color: #fff8e3;
+  font-size: 30px;
+}
+.speaker small {
+  color: #7e8b79;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
+}
+.speaker h2 {
+  font-family: Georgia, serif;
+  font-size: 29px;
+  font-weight: normal;
+  margin: 4px 0;
+}
+.spoken-text {
+  font-family: Georgia, serif;
+  font-size: 21px;
+  line-height: 1.55;
+  min-height: 128px;
+  margin: 18px 0 24px;
+}
+.your-question {
+  font-size: 12px;
+  color: #8d744e;
+  margin-bottom: -6px;
+}
+.conversation-choices {
+  display: grid;
+  gap: 8px;
+}
+.conversation-choices button {
+  display: flex;
+  text-align: left;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border: 1px solid #dfd8c4;
+  border-radius: 10px;
+  padding: 13px 15px;
+  background: #fffaf0;
+  color: #355c5a;
+  cursor: pointer;
+  font-size: 13px;
+}
+.conversation-choices button:hover,
+.conversation-choices button[aria-pressed="true"] {
+  background: #e9eddf;
+  border-color: #9caf99;
+}
+.conversation footer {
+  border-top: 1px solid #e2dac8;
+  padding-top: 20px;
+  margin-top: 24px;
+}
+.scene {
+  touch-action: none;
+}
+.talk-button kbd {
+  margin-right: 5px;
+}
+@media (max-width: 760px) {
+  .camera-controls {
+    right: 14px;
+    top: 155px;
+  }
+  .camera-controls button {
+    width: 34px;
+    height: 34px;
+  }
+  .conversation-inner {
+    padding: 18px 20px;
+  }
+  .speaker h2 {
+    font-size: 25px;
+  }
+  .spoken-text {
+    font-size: 18px;
+    min-height: 0;
+  }
+  .conversation footer {
+    gap: 8px;
+  }
+  .conversation footer .primary-button {
+    padding: 12px;
+  }
+  .touch-pad .jump-button {
+    grid-column: 4;
+    grid-row: 2;
+    margin-left: 10px;
+  }
+  .action-dock {
+    max-width: calc(100vw - 32px);
+  }
+  .action-dock .talk-button {
+    font-size: 10px;
+    padding: 12px;
+  }
+}
+
+.conversation {
+  margin: auto;
 }

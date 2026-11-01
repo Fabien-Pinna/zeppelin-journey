@@ -4,13 +4,20 @@ import * as THREE from "three";
 import { Avatar } from "./Avatar.jsx";
 import { Zeppelin } from "../world/Zeppelin.jsx";
 import {
-  constrainWalker,
+  moveWalker,
   deadZone,
   dockPosition,
   berthPosition,
   islands,
   nearestIsland,
 } from "./world.js";
+
+import {
+  groundHeight,
+  GUIDE_POSITION,
+  clampZoom,
+  cameraFraction,
+} from "./physics.js";
 
 /** Frame-driven movement, flight and assisted docking with a damped camera. */
 export const Journey = ({
@@ -25,12 +32,14 @@ export const Journey = ({
   telemetry,
   reduced,
   paused,
+  simulation,
 }) => {
   const avatar = useRef(),
     ship = useRef();
   const walker = useRef(new THREE.Vector3(7, 0.2, 8));
   const vessel = useRef(new THREE.Vector3(...berthPosition(islands[0])));
   const motion = useRef({ speed: 0 });
+  const vertical = useRef({ velocity: 0, jumpHeld: false });
   const heading = useRef(0),
     timer = useRef(0),
     gamepadAction = useRef(false);
@@ -98,16 +107,32 @@ export const Journey = ({
       const dx = (x * Math.cos(angle) - y * Math.sin(angle)) / length;
       const dz = (-y * Math.cos(angle) - x * Math.sin(angle)) / length;
       const speed = has("ShiftLeft", "ShiftRight") ? 5.6 : 3.2;
-      const [nx, nz] = constrainWalker(
-        walker.current.x + dx * speed * dt,
-        walker.current.z + dz * speed * dt,
+      const feet = walker.current.y - island.position[1];
+      const [nx, nz] = moveWalker(
+        walker.current.x,
+        walker.current.z,
+        dx * speed * dt,
+        dz * speed * dt,
         island,
+        feet,
+        simulation.current.time,
       );
-      const localX = nx - island.position[0],
-        localZ = nz - island.position[2];
-      const onPier =
-        localX > 4.8 && localX < 9.2 && localZ > 2.5 && localZ < 9.8;
-      walker.current.set(nx, island.position[1] + (onPier ? 0.2 : 0.02), nz);
+      const floor = island.position[1] + groundHeight(nx, nz, island);
+      const jump = has("Space") || input.current.jump;
+      if (
+        jump &&
+        !vertical.current.jumpHeld &&
+        walker.current.y <= floor + 0.035
+      )
+        vertical.current.velocity = 4.2;
+      vertical.current.jumpHeld = jump;
+      vertical.current.velocity -= 12 * dt;
+      const height = Math.max(
+        floor,
+        walker.current.y + vertical.current.velocity * dt,
+      );
+      if (height === floor) vertical.current.velocity = 0;
+      walker.current.set(nx, height, nz);
       motion.current.speed = THREE.MathUtils.damp(
         motion.current.speed,
         Math.min(1, Math.hypot(x, y)),
@@ -181,6 +206,11 @@ export const Journey = ({
         setMode("walking");
       }
     }
+    simulation.current.player = [
+      walker.current.x,
+      walker.current.y,
+      walker.current.z,
+    ];
     avatar.current.position.copy(walker.current);
     avatar.current.visible = mode === "walking" || mode === "overview";
     ship.current.position.copy(vessel.current);
@@ -197,7 +227,11 @@ export const Journey = ({
         camera.aspect < 1 ? 31 : 20,
         camera.aspect < 1 ? 58 : 36,
       );
-      vectors.look.set(camera.aspect < 1 ? 5 : -6, 2, camera.aspect < 1 ? 0 : -13);
+      vectors.look.set(
+        camera.aspect < 1 ? 5 : -6,
+        2,
+        camera.aspect < 1 ? 0 : -13,
+      );
     } else if (mode === "landing") {
       const dock = dockPosition(island),
         angle = input.current.orbit;
@@ -224,6 +258,19 @@ export const Journey = ({
       );
       vectors.look.copy(vessel.current).add(vectors.target.set(0, 2.8, 0));
     }
+    const zoom = clampZoom(input.current.zoom);
+    vectors.camera.sub(vectors.look).multiplyScalar(zoom).add(vectors.look);
+    if (mode === "walking") {
+      const fraction = cameraFraction(
+        vectors.look.toArray(),
+        vectors.camera.toArray(),
+        island,
+      );
+      vectors.camera
+        .sub(vectors.look)
+        .multiplyScalar(fraction)
+        .add(vectors.look);
+    }
     camera.position.lerp(vectors.camera, reduced ? 1 : 1 - Math.exp(-3 * dt));
     vectors.smoothLook.lerp(vectors.look, reduced ? 1 : 1 - Math.exp(-5 * dt));
     camera.lookAt(vectors.smoothLook);
@@ -242,6 +289,12 @@ export const Journey = ({
           4.5,
         canLand: near.distance < 18,
         gamepad: Boolean(pad),
+        canTalk:
+          mode === "walking" &&
+          Math.hypot(
+            walker.current.x - island.position[0] - GUIDE_POSITION[0],
+            walker.current.z - island.position[2] - GUIDE_POSITION[2],
+          ) < 3.4,
       });
     }
   });
@@ -249,13 +302,18 @@ export const Journey = ({
     <>
       <group ref={avatar}>
         <Suspense fallback={null}>
-          <Avatar motion={motion} reduced={reduced} />
+          <Avatar
+            motion={motion}
+            reduced={reduced || paused}
+            simulation={simulation}
+          />
         </Suspense>
       </group>
       <group ref={ship}>
         <Zeppelin
           flying={mode !== "walking" && mode !== "overview"}
           reduced={reduced}
+          simulation={simulation}
         />
       </group>
     </>

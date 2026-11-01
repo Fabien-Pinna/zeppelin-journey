@@ -152,24 +152,7 @@ export const berthPosition = (i) => [
   i.position[1] - 1,
   i.position[2] + 6,
 ];
-export const constrainWalker = (x, z, island) => {
-  let dx = x - island.position[0],
-    dz = z - island.position[2];
-  const distance = Math.hypot(dx, dz),
-    limit = island.radius - 0.9;
-  if (distance > limit) {
-    dx *= limit / distance;
-    dz *= limit / distance;
-  }
-  const obstacles = island.id === "circus" ? [[0, -3, 4.5]] : [[-3, -3, 3.4]];
-  for (const [ox, oz, radius] of obstacles)
-    if (Math.hypot(dx - ox, dz - oz) < radius) {
-      const angle = Math.atan2(dz - oz, dx - ox);
-      dx = ox + Math.cos(angle) * radius;
-      dz = oz + Math.sin(angle) * radius;
-    }
-  return [dx + island.position[0], dz + island.position[2]];
-};
+export { moveWalker } from "./physics.js";
 export const nearestIsland = (x, z) =>
   islands.reduce((best, island) => {
     const dock = dockPosition(island),

@@ -1,5 +1,5 @@
 /** Pointer-captured pad supports touch and releases input on cancellation. */
-export const TouchControls = ({ input }) => {
+export const TouchControls = ({ input, walking }) => {
   const press = (event, x, y) => {
     event.currentTarget.setPointerCapture(event.pointerId);
     input.current.touch = { x, y };
@@ -26,6 +26,27 @@ export const TouchControls = ({ input }) => {
           {icon}
         </button>
       ))}
+      {walking && (
+        <button
+          className="jump-button"
+          aria-label="Sauter"
+          onPointerDown={(e) => {
+            e.currentTarget.setPointerCapture(e.pointerId);
+            input.current.jump = true;
+          }}
+          onPointerUp={() => {
+            input.current.jump = false;
+          }}
+          onPointerCancel={() => {
+            input.current.jump = false;
+          }}
+          onLostPointerCapture={() => {
+            input.current.jump = false;
+          }}
+        >
+          ⤴
+        </button>
+      )}
     </div>
   );
 };

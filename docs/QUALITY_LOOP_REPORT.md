@@ -22,3 +22,16 @@ Implementation target: detailed Blender-authored reusable assets exported as GLB
 Editable local source: `artifacts/blender/zeppelin-journey-v2.blend`. Browser proof is stored under ignored `artifacts/v2-*.png`. See `ASSETS.md` for asset provenance and `implementation.md` for remaining system limits.
 
 A post-publication check exposed a recoverable React `removeChild` error while the Drei HTML loading portal was being removed. The loader now lives in the ordinary DOM next to the canvas and remains visible until the scene has committed; the 3D Suspense boundary has no HTML portal fallback. This avoids competing portal cleanup during startup. The compact mobile overview was also reframed to keep the airship above the departure card.
+
+
+## Living dioramas pass — 2026-11-01
+
+User-authorized scope: life in all nine dioramas, chapter conversations, visible trapeze performer, more physical interaction, zoom, and placement cleanup.
+
+Implemented: nine distinct animated activities, nine guides with three questions each, shared pause-aware simulation time, gravity-driven trapeze pendulum with rigid hand/bar coupling, a backpack-free artist costume, continuous parabolic juggling throws, animated glTF windmill/sheep/clock pivots, collider manifest exported with Blender models, substepped walking/sliding, jump/gravity, camera obstruction avoidance, wheel/buttons/keyboard/pinch zoom and touch jump.
+
+Repairs: lamps moved away from Club Med loungers, the atelier display, O’Clock desks and Backroads van; atelier desks moved inside pavilion walls; bunting pole moved away from the farm fence; the ladder gained inclined supports and a platform; a central trapeze crossbeam and a larger independently anchored net were added. The mechanic was moved clear of the workbench. In-scene chapter labels now appear only in the overview so they do not cover performances. The dialogue was centred after mobile/desktop checks. A Blender suffix/Three.js sanitization mismatch in the second costume was found in browser QA, fixed and given a regression test.
+
+Verification: 14 tests cover exported assets and joint binding, all nine docking/guide approaches, fast movement against thin poles, wall sliding, boundary limits, post/furniture clearances, worker paths, continuous/non-intersecting juggling trajectories, camera obstruction and pendulum frame independence. A five-minute pendulum run (maximum swing about 33.9 degrees; feet at least 2.60 m high over the 1.8 m net) checks hand contact, vertical clearance and the full body envelope above the net. Blender numeric inspection confirms that the bar grip lies inside each hand mesh. Browser checks cover actual trapeze poses, mobile dialogue, touch movement/jump, zoom, guide conversation and a guided tour of the other activities. Evidence lives in ignored `artifacts/life-*` screenshots and `artifacts/trapeze-grip-inspection.json`.
+
+Limits: fixed props use simplified semantic boxes/cylinders, not exact triangle collision or pushable rigid bodies; tiny vegetation is non-solid. Dialogue is text. Physical multitouch and gamepad hardware, low-end GPUs and subjective visual perfection are not certified. User visual acceptance is not assumed.

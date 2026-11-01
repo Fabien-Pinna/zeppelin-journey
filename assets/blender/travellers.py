@@ -44,7 +44,7 @@ def airship():
     for o in objects:o.hide_set(True);o.hide_render=True
     return len(objects)
 
-def character():
+def character(asset="traveller", backpack=True):
     # A new adult storybook adventurer: tailored teal jacket, rust scarf,
     # sculpted facial features, wavy hair, leather satchel and hiking boots.
     all_objects=[]
@@ -52,7 +52,7 @@ def character():
     def part(name,pivot,build):
         joint=bpy.data.objects.new(name,None);bpy.context.scene.collection.objects.link(joint);joint.parent=root
         joint.location=(pivot[0],-pivot[2],pivot[1]);all_objects.append(joint)
-        b=Batch('traveller-'+name);build(b)
+        b=Batch(asset+'-'+name);build(b)
         objs=b.finish(parent=joint)
         for o in objs:
             for v in o.data.vertices:v.co-=Vector(joint.location)
@@ -68,11 +68,12 @@ def character():
         b.ball((0,1.62,0),(.12,.15,.12),'skin')
         b.ring((0,1.57,0),.145,.06,'scarf',segments=20)
         b.box((.12,1.37,.235),(.14,.4,.055),'scarf',rot=(0,0,.25))
-        b.box((0,1.3,-.28),(.49,.56,.24),'leather')
-        b.box((0,1.56,-.29),(.51,.13,.26),'wood')
-        b.box((0,1.28,-.422),(.17,.12,.025),'brass')
-        for x in [-.22,.22]:b.beam((x,1.55,.1),(x,1.02,.19),.028,'leather')
-        b.beam((-.22,1.59,-.27),(.22,1.59,-.27),.08,'cream')
+        if backpack:
+            b.box((0,1.3,-.28),(.49,.56,.24),'leather')
+            b.box((0,1.56,-.29),(.51,.13,.26),'wood')
+            b.box((0,1.28,-.422),(.17,.12,.025),'brass')
+            for x in [-.22,.22]:b.beam((x,1.55,.1),(x,1.02,.19),.028,'leather')
+            b.beam((-.22,1.59,-.27),(.22,1.59,-.27),.08,'cream')
     part('Body',(0,1.1,0),body)
     def head(b):
         b.ball((0,1.92,.015),(.265,.31,.235),'skin')
@@ -110,6 +111,6 @@ def character():
             b.box((s*.155,.055,.07),(.26,.09,.43),'darkwood')
             for y,z in [(.2,.17),(.23,.12),(.26,.06)]:b.beam((s*.155-.06,y,z),(s*.155+.06,y,z),.008,'cream',4)
         part(label+'Leg',(side*.155,.94,0),leg)
-    export(all_objects,OUT/'traveller.glb')
+    export(all_objects,OUT/(asset+'.glb'))
     for o in all_objects:o.hide_set(True);o.hide_render=True
     return len(all_objects)

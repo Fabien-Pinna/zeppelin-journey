@@ -1,9 +1,19 @@
-import { Suspense, useEffect, useState } from "react";
-import { Canvas, useThree } from "@react-three/fiber";
+import { Suspense, useEffect, useState, useRef } from "react";
+import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import { useTexture, Environment, useProgress } from "@react-three/drei";
 import * as THREE from "three";
 import { Scenery } from "./Scenery.jsx";
 import { Journey } from "../journey/Journey.jsx";
+import { createPendulum, stepPendulum } from "../journey/physics.js";
+const Simulation = ({ simulation, paused, reduced }) => {
+  useFrame((_, delta) => {
+    if (!paused && !reduced) {
+      simulation.current.time += Math.min(delta, 0.05);
+      stepPendulum(simulation.current.pendulum, delta);
+    }
+  }, -10);
+  return null;
+};
 const Atmosphere = ({ night }) => {
   const skies = useTexture([
     "/textures/cloud-sea.png",
@@ -73,6 +83,11 @@ const Ready = ({ onReady }) => {
 
 export const World = (props) => {
   const [ready, setReady] = useState(false);
+  const simulation = useRef({
+    time: 0,
+    pendulum: createPendulum(),
+    player: [7, 0.2, 8],
+  });
   return (
     <>
       <Canvas
@@ -94,14 +109,21 @@ export const World = (props) => {
       >
         <Suspense fallback={null}>
           <Atmosphere night={props.night} />
+          <Simulation
+            simulation={simulation}
+            paused={props.paused}
+            reduced={props.reduced}
+          />
           <Scenery
             onExhibit={props.onExhibit}
+            onTalk={props.onTalk}
+            simulation={simulation}
             islandId={props.islandId}
             mode={props.mode}
             reduced={props.reduced}
             paused={props.paused}
           />
-          <Journey {...props} />
+          <Journey {...props} simulation={simulation} />
           <Ready onReady={setReady} />
         </Suspense>
       </Canvas>

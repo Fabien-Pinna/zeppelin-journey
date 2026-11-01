@@ -1,6 +1,6 @@
 # Zeppelin Journey
 
-A playable React Three Fiber portfolio: walk through a floating archipelago, board a zeppelin and travel between three narrative stops.
+A playable React Three Fiber portfolio: walk through a floating archipelago, board a zeppelin and travel between nine professional and creative chapters.
 
 ## Run
 
@@ -18,16 +18,19 @@ No environment variables or API keys are required. `npm run preview` serves the 
 ## Controls
 
 - WASD, ZQSD or arrows: move; in flight, left/right steer and up/down propel.
-- Drag the scene: rotate the camera.
+- Drag the scene: rotate the camera. Wheel, +/− buttons or pinch: zoom; centre button resets the view.
+- F near the guide, or click their speech bubble: ask three chapter-specific questions.
 - E: board near the dock, or land near an island.
-- Space / Shift: ascend / descend in flight. Shift: run on foot.
+- Space / Shift: ascend / descend in flight. Space: jump on foot; Shift: run.
 - Standard gamepad: left stick movement, right stick camera, A action, triggers altitude.
 - Touch: directional pad, action buttons and guided routes through the island menu.
 
-The journal pauses movement. The reduced-motion option stops ambient animation and camera smoothing; a completely static reading experience is available through the no-3D version.
+The journal, conversations and navigation overlays pause movement and ambient activity. The reduced-motion option stops ambient animation and camera smoothing; a completely static reading experience is available through the no-3D version.
 
-## First playable scope
+## Living archipelago
 
-Three islands: the port/workshop, Backroads and the theatre. Each has a dock, an exhibit and a guided flight destination. The supplied Ready Player Me avatar uses procedural rig animation; the source contains no animation clips. Scenery and the zeppelin are original procedural meshes, intended as the first navigable art pass.
+Nine detailed Blender dioramas cover development, warehouse work, masonry, agriculture, Club Med trapeze, ten years of circus, Backroads, self-taught learning and O’Clock. Every island has an animated worker or artist and an approachable guide. The physical pendulum carries the trapeze artist; other scenes include juggling, grazing sheep, a windmill, tool work, reading and teaching.
+
+Walking uses a collider manifest exported from the same Blender geometry: walls, furniture, posts, crates and other solid props. Substepped movement slides along obstacles, with gravity, jumping and an island boundary. This is lightweight kinematic physics, not a rigid-body destruction simulation.
 
 See [implementation notes](docs/implementation.md) for boundaries, content provenance and remaining work. The GitHub repository is private. Sites publication uses `.openai/hosting.json` and the Sites source workflow; GitHub pushes alone do not currently publish the Site.

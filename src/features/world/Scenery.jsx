@@ -1,10 +1,17 @@
-import { useMemo, useRef } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useMemo } from "react";
 import { Html, useGLTF } from "@react-three/drei";
 import { islands } from "../journey/world.js";
-import { Avatar } from "../journey/Avatar.jsx";
+import { Activity, Guide, useScenicMotion } from "./Life.jsx";
 useGLTF.setDecoderPath("/draco/");
-const Diorama = ({ island, onExhibit, selected, overview }) => {
+const Diorama = ({
+  island,
+  onExhibit,
+  onTalk,
+  selected,
+  overview,
+  alive,
+  simulation,
+}) => {
   const { scene } = useGLTF(`/models/world-v2/${island.id}.glb`);
   const model = useMemo(() => {
     const copy = scene.clone(true);
@@ -16,10 +23,15 @@ const Diorama = ({ island, onExhibit, selected, overview }) => {
     });
     return copy;
   }, [scene]);
+  useScenicMotion(model, simulation);
   return (
     <group position={island.position}>
       <primitive object={model} dispose={null} />
-      {(selected || overview) && (
+      {alive && <Activity id={island.id} simulation={simulation} />}
+      {selected && (
+        <Guide island={island} simulation={simulation} onTalk={onTalk} />
+      )}
+      {overview && (
         <Html
           position={overview ? [0, 8, -3] : [2.5, 2.5, 3]}
           center
@@ -40,46 +52,16 @@ const Diorama = ({ island, onExhibit, selected, overview }) => {
     </group>
   );
 };
-const Stroller = ({ island, reduced, paused, onExhibit }) => {
-  const ref = useRef(),
-    time = useRef(0),
-    motion = useRef({ speed: 0 });
-  useFrame((_, dt) => {
-    if (!ref.current) return;
-    if (!paused && !reduced) time.current += Math.min(dt, 0.05);
-    const t = time.current * 0.25;
-    ref.current.position.set(
-      island.position[0] - 4 + Math.sin(t) * 1.5,
-      island.position[1] + 0.12,
-      island.position[2] + 4.5,
-    );
-    ref.current.rotation.y = Math.cos(t) > 0 ? Math.PI / 2 : -Math.PI / 2;
-    motion.current.speed = paused || reduced ? 0 : Math.abs(Math.cos(t)) * 0.35;
-  });
-  return (
-    <group
-      ref={ref}
-      scale={0.9}
-      onClick={(e) => {
-        e.stopPropagation();
-        onExhibit(island.id);
-      }}
-    >
-      <Avatar
-        motion={motion}
-        reduced={reduced || paused}
-        coat={island.id === "atelier" ? "#ac704d" : "#8b4b43"}
-      />
-    </group>
-  );
-};
-export const Scenery = ({ onExhibit, islandId, mode, reduced, paused }) => (
+export const Scenery = ({ onExhibit, onTalk, islandId, mode, simulation }) => (
   <>
     {islands.map((island) => (
       <Diorama
         key={island.id}
         island={island}
         onExhibit={onExhibit}
+        onTalk={onTalk}
+        simulation={simulation}
+        alive
         selected={mode === "walking" && island.id === islandId}
         overview={
           mode === "overview" &&
@@ -87,16 +69,5 @@ export const Scenery = ({ onExhibit, islandId, mode, reduced, paused }) => (
         }
       />
     ))}
-    {islands
-      .filter((i) => ["atelier", "circus"].includes(i.id))
-      .map((i) => (
-        <Stroller
-          key={i.id}
-          island={i}
-          reduced={reduced}
-          paused={paused}
-          onExhibit={onExhibit}
-        />
-      ))}
   </>
 );

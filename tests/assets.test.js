@@ -71,3 +71,24 @@ test("the new traveller includes the articulated limbs used by the runtime", () 
   ])
     assert.ok(names.has(name), name);
 });
+
+test("both exported costumes retain joints after Three.js name sanitization", async () => {
+  const { PropertyBinding } = await import("three");
+  const { jointName, JOINTS } =
+    await import("../src/features/journey/joints.js");
+  for (const asset of ["traveller", "acrobat"]) {
+    const bytes = readFileSync(
+      new URL(`../public/models/world-v2/${asset}.glb`, import.meta.url),
+    );
+    const gltf = JSON.parse(
+      bytes.toString("utf8", 20, 20 + bytes.readUInt32LE(12)),
+    );
+    const actual = new Set(
+      gltf.nodes.map((node) =>
+        jointName(PropertyBinding.sanitizeNodeName(node.name)),
+      ),
+    );
+    for (const joint of JOINTS)
+      assert.ok(actual.has(joint), `${asset}: ${joint}`);
+  }
+});

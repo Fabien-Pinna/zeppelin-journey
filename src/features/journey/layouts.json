@@ -1,0 +1,4556 @@
+{
+  "atelier": [
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        2.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        7.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        9.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        2.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        7.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        9.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        1.05,
+        9.3
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        1.05,
+        9.3
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "crate",
+      "type": "box",
+      "position": [
+        8.5,
+        0.6000000000000001,
+        3.3
+      ],
+      "size": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "name": "barrel",
+      "type": "cylinder",
+      "position": [
+        5.5,
+        0.4,
+        3.2
+      ],
+      "size": [
+        0.6400000000000001,
+        0.8800000000000001,
+        0.6400000000000001
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        -8,
+        2.16,
+        -4
+      ],
+      "size": [
+        0.66,
+        4.32,
+        0.66
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        6,
+        2.3400000000000003,
+        -7
+      ],
+      "size": [
+        0.7150000000000001,
+        4.680000000000001,
+        0.7150000000000001
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        -9,
+        1.4400000000000002,
+        4
+      ],
+      "size": [
+        0.44000000000000006,
+        2.8800000000000003,
+        0.44000000000000006
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        8,
+        1.62,
+        0
+      ],
+      "size": [
+        0.49500000000000005,
+        3.24,
+        0.49500000000000005
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        -10,
+        1.05,
+        7
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        10,
+        1.05,
+        1
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        -7,
+        1.05,
+        -1
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        9,
+        1.05,
+        -5.5
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "desk",
+      "type": "box",
+      "position": [
+        -4.4,
+        0.85,
+        -3.3
+      ],
+      "size": [
+        2,
+        1.7,
+        0.8
+      ]
+    },
+    {
+      "name": "chair",
+      "type": "box",
+      "position": [
+        -4.4,
+        0.65,
+        -2.3
+      ],
+      "size": [
+        0.7,
+        1.3,
+        0.75
+      ]
+    },
+    {
+      "name": "desk",
+      "type": "box",
+      "position": [
+        -2,
+        0.85,
+        -3.3
+      ],
+      "size": [
+        2,
+        1.7,
+        0.8
+      ]
+    },
+    {
+      "name": "chair",
+      "type": "box",
+      "position": [
+        -2,
+        0.65,
+        -2.3
+      ],
+      "size": [
+        0.7,
+        1.3,
+        0.75
+      ]
+    },
+    {
+      "name": "desk",
+      "type": "box",
+      "position": [
+        0.4,
+        0.85,
+        -3.3
+      ],
+      "size": [
+        2,
+        1.7,
+        0.8
+      ]
+    },
+    {
+      "name": "chair",
+      "type": "box",
+      "position": [
+        0.4,
+        0.65,
+        -2.3
+      ],
+      "size": [
+        0.7,
+        1.3,
+        0.75
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        -5.8,
+        1.55,
+        -0.1
+      ],
+      "size": [
+        0.22,
+        3.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        1.8,
+        1.55,
+        -0.1
+      ],
+      "size": [
+        0.22,
+        3.1,
+        0.22
+      ]
+    },
+    {
+      "name": "pavilion-wall",
+      "type": "box",
+      "position": [
+        -5.7,
+        2,
+        -3
+      ],
+      "size": [
+        0.28,
+        4,
+        5.5
+      ]
+    },
+    {
+      "name": "pavilion-wall",
+      "type": "box",
+      "position": [
+        1.7,
+        2,
+        -3
+      ],
+      "size": [
+        0.28,
+        4,
+        5.5
+      ]
+    },
+    {
+      "name": "pavilion-back",
+      "type": "box",
+      "position": [
+        -2,
+        2,
+        -5.8
+      ],
+      "size": [
+        7.6,
+        4,
+        0.25
+      ]
+    },
+    {
+      "name": "pavilion-post",
+      "type": "cylinder",
+      "position": [
+        -5.7,
+        2,
+        -0.3
+      ],
+      "size": [
+        0.3,
+        4,
+        0.3
+      ]
+    },
+    {
+      "name": "pavilion-post",
+      "type": "cylinder",
+      "position": [
+        -2,
+        2,
+        -0.3
+      ],
+      "size": [
+        0.3,
+        4,
+        0.3
+      ]
+    },
+    {
+      "name": "pavilion-post",
+      "type": "cylinder",
+      "position": [
+        1.7,
+        2,
+        -0.3
+      ],
+      "size": [
+        0.3,
+        4,
+        0.3
+      ]
+    },
+    {
+      "name": "display",
+      "type": "box",
+      "position": [
+        2.5,
+        1.2,
+        1
+      ],
+      "size": [
+        1.3,
+        2.4,
+        0.7
+      ]
+    },
+    {
+      "name": "bunting-post",
+      "type": "cylinder",
+      "position": [
+        -7,
+        2,
+        2
+      ],
+      "size": [
+        0.2,
+        4,
+        0.2
+      ]
+    },
+    {
+      "name": "bunting-post",
+      "type": "cylinder",
+      "position": [
+        6,
+        2,
+        2
+      ],
+      "size": [
+        0.2,
+        4,
+        0.2
+      ]
+    }
+  ],
+  "warehouse": [
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        2.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        7.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        9.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        2.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        7.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        9.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        1.05,
+        9.3
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        1.05,
+        9.3
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "crate",
+      "type": "box",
+      "position": [
+        8.5,
+        0.6000000000000001,
+        3.3
+      ],
+      "size": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "name": "barrel",
+      "type": "cylinder",
+      "position": [
+        5.5,
+        0.4,
+        3.2
+      ],
+      "size": [
+        0.6400000000000001,
+        0.8800000000000001,
+        0.6400000000000001
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        -8,
+        2.16,
+        -4
+      ],
+      "size": [
+        0.66,
+        4.32,
+        0.66
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        6,
+        2.3400000000000003,
+        -7
+      ],
+      "size": [
+        0.7150000000000001,
+        4.680000000000001,
+        0.7150000000000001
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        -9,
+        1.4400000000000002,
+        4
+      ],
+      "size": [
+        0.44000000000000006,
+        2.8800000000000003,
+        0.44000000000000006
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        8,
+        1.62,
+        0
+      ],
+      "size": [
+        0.49500000000000005,
+        3.24,
+        0.49500000000000005
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        -10,
+        1.05,
+        7
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        10,
+        1.05,
+        1
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        -7,
+        1.05,
+        -1
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        9,
+        1.05,
+        -5.5
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "building",
+      "type": "box",
+      "position": [
+        -2,
+        1.8,
+        -4
+      ],
+      "size": [
+        7,
+        3.6,
+        4
+      ]
+    },
+    {
+      "name": "crate",
+      "type": "box",
+      "position": [
+        -5.0,
+        0.5,
+        1.0
+      ],
+      "size": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "crate",
+      "type": "box",
+      "position": [
+        -3.9,
+        0.5,
+        1.0
+      ],
+      "size": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "crate",
+      "type": "box",
+      "position": [
+        -2.8,
+        0.5,
+        1.0
+      ],
+      "size": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "crate",
+      "type": "box",
+      "position": [
+        -5.0,
+        0.5,
+        2.15
+      ],
+      "size": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "crate",
+      "type": "box",
+      "position": [
+        -3.9,
+        0.5,
+        2.15
+      ],
+      "size": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "crate",
+      "type": "box",
+      "position": [
+        -2.8,
+        1.55,
+        2.15
+      ],
+      "size": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "crate",
+      "type": "box",
+      "position": [
+        -5.0,
+        1.55,
+        3.3
+      ],
+      "size": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "crate",
+      "type": "box",
+      "position": [
+        -3.9,
+        1.55,
+        3.3
+      ],
+      "size": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "forklift",
+      "type": "box",
+      "position": [
+        2.5,
+        1.25,
+        1.9
+      ],
+      "size": [
+        1.8,
+        2.5,
+        3.5
+      ]
+    },
+    {
+      "name": "pallets",
+      "type": "box",
+      "position": [
+        2.9,
+        0.35,
+        -1.5
+      ],
+      "size": [
+        1.1,
+        0.7,
+        1.1
+      ]
+    },
+    {
+      "name": "bunting-post",
+      "type": "cylinder",
+      "position": [
+        -7,
+        2,
+        2
+      ],
+      "size": [
+        0.2,
+        4,
+        0.2
+      ]
+    },
+    {
+      "name": "bunting-post",
+      "type": "cylinder",
+      "position": [
+        6,
+        2,
+        2
+      ],
+      "size": [
+        0.2,
+        4,
+        0.2
+      ]
+    }
+  ],
+  "masonry": [
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        2.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        7.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        9.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        2.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        7.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        9.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        1.05,
+        9.3
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        1.05,
+        9.3
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "crate",
+      "type": "box",
+      "position": [
+        8.5,
+        0.6000000000000001,
+        3.3
+      ],
+      "size": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "name": "barrel",
+      "type": "cylinder",
+      "position": [
+        5.5,
+        0.4,
+        3.2
+      ],
+      "size": [
+        0.6400000000000001,
+        0.8800000000000001,
+        0.6400000000000001
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        -8,
+        2.16,
+        -4
+      ],
+      "size": [
+        0.66,
+        4.32,
+        0.66
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        6,
+        2.3400000000000003,
+        -7
+      ],
+      "size": [
+        0.7150000000000001,
+        4.680000000000001,
+        0.7150000000000001
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        -9,
+        1.4400000000000002,
+        4
+      ],
+      "size": [
+        0.44000000000000006,
+        2.8800000000000003,
+        0.44000000000000006
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        8,
+        1.62,
+        0
+      ],
+      "size": [
+        0.49500000000000005,
+        3.24,
+        0.49500000000000005
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        -10,
+        1.05,
+        7
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        10,
+        1.05,
+        1
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        -7,
+        1.05,
+        -1
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        9,
+        1.05,
+        -5.5
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "building",
+      "type": "box",
+      "position": [
+        -4,
+        1.5,
+        -4
+      ],
+      "size": [
+        4.7,
+        3,
+        4
+      ]
+    },
+    {
+      "name": "arch-pier",
+      "type": "box",
+      "position": [
+        -0.4,
+        1.4,
+        -2
+      ],
+      "size": [
+        0.7,
+        2.8,
+        0.85
+      ]
+    },
+    {
+      "name": "arch-pier",
+      "type": "box",
+      "position": [
+        2.4,
+        1.4,
+        -2
+      ],
+      "size": [
+        0.7,
+        2.8,
+        0.85
+      ]
+    },
+    {
+      "name": "crane-post",
+      "type": "box",
+      "position": [
+        -1,
+        3,
+        -4
+      ],
+      "size": [
+        0.32,
+        6,
+        0.32
+      ]
+    },
+    {
+      "name": "crane-post",
+      "type": "box",
+      "position": [
+        4,
+        3,
+        -4
+      ],
+      "size": [
+        0.32,
+        6,
+        0.32
+      ]
+    },
+    {
+      "name": "stone-stack",
+      "type": "box",
+      "position": [
+        0.5,
+        0.6,
+        1
+      ],
+      "size": [
+        2.6,
+        1.2,
+        0.6
+      ]
+    },
+    {
+      "name": "wheelbarrow",
+      "type": "box",
+      "position": [
+        3,
+        0.7,
+        2
+      ],
+      "size": [
+        1,
+        1.4,
+        2.2
+      ]
+    },
+    {
+      "name": "bunting-post",
+      "type": "cylinder",
+      "position": [
+        -7,
+        2,
+        2
+      ],
+      "size": [
+        0.2,
+        4,
+        0.2
+      ]
+    },
+    {
+      "name": "bunting-post",
+      "type": "cylinder",
+      "position": [
+        6,
+        2,
+        2
+      ],
+      "size": [
+        0.2,
+        4,
+        0.2
+      ]
+    }
+  ],
+  "farm": [
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        2.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        7.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        9.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        2.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        7.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        9.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        1.05,
+        9.3
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        1.05,
+        9.3
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "crate",
+      "type": "box",
+      "position": [
+        8.5,
+        0.6000000000000001,
+        3.3
+      ],
+      "size": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "name": "barrel",
+      "type": "cylinder",
+      "position": [
+        5.5,
+        0.4,
+        3.2
+      ],
+      "size": [
+        0.6400000000000001,
+        0.8800000000000001,
+        0.6400000000000001
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        -8,
+        2.16,
+        -4
+      ],
+      "size": [
+        0.66,
+        4.32,
+        0.66
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        6,
+        2.3400000000000003,
+        -7
+      ],
+      "size": [
+        0.7150000000000001,
+        4.680000000000001,
+        0.7150000000000001
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        -9,
+        1.4400000000000002,
+        4
+      ],
+      "size": [
+        0.44000000000000006,
+        2.8800000000000003,
+        0.44000000000000006
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        8,
+        1.62,
+        0
+      ],
+      "size": [
+        0.49500000000000005,
+        3.24,
+        0.49500000000000005
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        -10,
+        1.05,
+        7
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        10,
+        1.05,
+        1
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        -7,
+        1.05,
+        -1
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        9,
+        1.05,
+        -5.5
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "building",
+      "type": "box",
+      "position": [
+        1,
+        1.5,
+        -4
+      ],
+      "size": [
+        5,
+        3,
+        4
+      ]
+    },
+    {
+      "name": "windmill",
+      "type": "cylinder",
+      "position": [
+        -5,
+        3,
+        -5
+      ],
+      "size": [
+        2,
+        6,
+        2
+      ]
+    },
+    {
+      "name": "fence",
+      "type": "box",
+      "position": [
+        5.2,
+        0.55,
+        2.2
+      ],
+      "size": [
+        0.16,
+        1.1,
+        6.6
+      ]
+    },
+    {
+      "name": "bunting-post",
+      "type": "cylinder",
+      "position": [
+        -7,
+        2,
+        2
+      ],
+      "size": [
+        0.2,
+        4,
+        0.2
+      ]
+    },
+    {
+      "name": "bunting-post",
+      "type": "cylinder",
+      "position": [
+        6,
+        2,
+        2
+      ],
+      "size": [
+        0.2,
+        4,
+        0.2
+      ]
+    }
+  ],
+  "clubmed": [
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        2.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        7.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        9.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        2.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        7.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        9.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        1.05,
+        9.3
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        1.05,
+        9.3
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "crate",
+      "type": "box",
+      "position": [
+        8.5,
+        0.6000000000000001,
+        3.3
+      ],
+      "size": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "name": "barrel",
+      "type": "cylinder",
+      "position": [
+        5.5,
+        0.4,
+        3.2
+      ],
+      "size": [
+        0.6400000000000001,
+        0.8800000000000001,
+        0.6400000000000001
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        -8,
+        2.16,
+        -4
+      ],
+      "size": [
+        0.66,
+        4.32,
+        0.66
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        6,
+        2.3400000000000003,
+        -7
+      ],
+      "size": [
+        0.7150000000000001,
+        4.680000000000001,
+        0.7150000000000001
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        -9,
+        1.4400000000000002,
+        4
+      ],
+      "size": [
+        0.44000000000000006,
+        2.8800000000000003,
+        0.44000000000000006
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        8,
+        1.62,
+        0
+      ],
+      "size": [
+        0.49500000000000005,
+        3.24,
+        0.49500000000000005
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        -10,
+        1.05,
+        7
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        10,
+        1.05,
+        1
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        -7,
+        1.05,
+        -1
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        9,
+        1.05,
+        -5.5
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "net-post",
+      "type": "cylinder",
+      "position": [
+        -3.7,
+        1,
+        -5.8
+      ],
+      "size": [
+        0.15,
+        2,
+        0.15
+      ]
+    },
+    {
+      "name": "net-post",
+      "type": "cylinder",
+      "position": [
+        -3.7,
+        1,
+        0.8
+      ],
+      "size": [
+        0.15,
+        2,
+        0.15
+      ]
+    },
+    {
+      "name": "net-post",
+      "type": "cylinder",
+      "position": [
+        3.7,
+        1,
+        -5.8
+      ],
+      "size": [
+        0.15,
+        2,
+        0.15
+      ]
+    },
+    {
+      "name": "net-post",
+      "type": "cylinder",
+      "position": [
+        3.7,
+        1,
+        0.8
+      ],
+      "size": [
+        0.15,
+        2,
+        0.15
+      ]
+    },
+    {
+      "name": "trapeze-post",
+      "type": "cylinder",
+      "position": [
+        -3.7,
+        3.5,
+        -5
+      ],
+      "size": [
+        0.2,
+        7,
+        0.2
+      ]
+    },
+    {
+      "name": "trapeze-post",
+      "type": "cylinder",
+      "position": [
+        -3.7,
+        3.5,
+        0
+      ],
+      "size": [
+        0.2,
+        7,
+        0.2
+      ]
+    },
+    {
+      "name": "trapeze-post",
+      "type": "cylinder",
+      "position": [
+        3.7,
+        3.5,
+        -5
+      ],
+      "size": [
+        0.2,
+        7,
+        0.2
+      ]
+    },
+    {
+      "name": "trapeze-post",
+      "type": "cylinder",
+      "position": [
+        3.7,
+        3.5,
+        0
+      ],
+      "size": [
+        0.2,
+        7,
+        0.2
+      ]
+    },
+    {
+      "name": "safety-net",
+      "type": "box",
+      "position": [
+        0,
+        1.8,
+        -2.5
+      ],
+      "size": [
+        7,
+        0.12,
+        6.2
+      ]
+    },
+    {
+      "name": "ladder",
+      "type": "box",
+      "position": [
+        -4.3,
+        2.4,
+        -1.2
+      ],
+      "size": [
+        0.85,
+        4.8,
+        2.2
+      ]
+    },
+    {
+      "name": "lounge-chair",
+      "type": "box",
+      "position": [
+        -4,
+        0.65,
+        4
+      ],
+      "size": [
+        1.35,
+        1.3,
+        2.4
+      ]
+    },
+    {
+      "name": "lounge-chair",
+      "type": "box",
+      "position": [
+        -1,
+        0.65,
+        4
+      ],
+      "size": [
+        1.35,
+        1.3,
+        2.4
+      ]
+    },
+    {
+      "name": "lounge-chair",
+      "type": "box",
+      "position": [
+        2,
+        0.65,
+        4
+      ],
+      "size": [
+        1.35,
+        1.3,
+        2.4
+      ]
+    },
+    {
+      "name": "bunting-post",
+      "type": "cylinder",
+      "position": [
+        -7,
+        2,
+        2
+      ],
+      "size": [
+        0.2,
+        4,
+        0.2
+      ]
+    },
+    {
+      "name": "bunting-post",
+      "type": "cylinder",
+      "position": [
+        6,
+        2,
+        2
+      ],
+      "size": [
+        0.2,
+        4,
+        0.2
+      ]
+    }
+  ],
+  "circus": [
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        2.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        7.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        9.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        2.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        7.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        9.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        1.05,
+        9.3
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        1.05,
+        9.3
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "crate",
+      "type": "box",
+      "position": [
+        8.5,
+        0.6000000000000001,
+        3.3
+      ],
+      "size": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "name": "barrel",
+      "type": "cylinder",
+      "position": [
+        5.5,
+        0.4,
+        3.2
+      ],
+      "size": [
+        0.6400000000000001,
+        0.8800000000000001,
+        0.6400000000000001
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        -8,
+        2.16,
+        -4
+      ],
+      "size": [
+        0.66,
+        4.32,
+        0.66
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        6,
+        2.3400000000000003,
+        -7
+      ],
+      "size": [
+        0.7150000000000001,
+        4.680000000000001,
+        0.7150000000000001
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        -9,
+        1.4400000000000002,
+        4
+      ],
+      "size": [
+        0.44000000000000006,
+        2.8800000000000003,
+        0.44000000000000006
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        8,
+        1.62,
+        0
+      ],
+      "size": [
+        0.49500000000000005,
+        3.24,
+        0.49500000000000005
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        -10,
+        1.05,
+        7
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        10,
+        1.05,
+        1
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        -7,
+        1.05,
+        -1
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        9,
+        1.05,
+        -5.5
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "tent-pole",
+      "type": "cylinder",
+      "position": [
+        0,
+        3.4,
+        -3
+      ],
+      "size": [
+        0.2,
+        6.8,
+        0.2
+      ]
+    },
+    {
+      "name": "tent-wall",
+      "type": "cylinder",
+      "position": [
+        4.28674453505245,
+        1.5,
+        -2.662625888370267
+      ],
+      "size": [
+        0.72,
+        3,
+        0.72
+      ]
+    },
+    {
+      "name": "tent-wall",
+      "type": "cylinder",
+      "position": [
+        4.181190657710009,
+        1.5,
+        -1.9961849354196068
+      ],
+      "size": [
+        0.72,
+        3,
+        0.72
+      ]
+    },
+    {
+      "name": "tent-wall",
+      "type": "cylinder",
+      "position": [
+        3.9726819897985326,
+        1.5,
+        -1.354461240830114
+      ],
+      "size": [
+        0.72,
+        3,
+        0.72
+      ]
+    },
+    {
+      "name": "tent-wall",
+      "type": "cylinder",
+      "position": [
+        3.6663527067225967,
+        1.5,
+        -0.7532561717214201
+      ],
+      "size": [
+        0.72,
+        3,
+        0.72
+      ]
+    },
+    {
+      "name": "tent-wall",
+      "type": "cylinder",
+      "position": [
+        -3.9726819897985326,
+        1.5,
+        -1.3544612408301135
+      ],
+      "size": [
+        0.72,
+        3,
+        0.72
+      ]
+    },
+    {
+      "name": "tent-wall",
+      "type": "cylinder",
+      "position": [
+        -4.181190657710009,
+        1.5,
+        -1.9961849354196062
+      ],
+      "size": [
+        0.72,
+        3,
+        0.72
+      ]
+    },
+    {
+      "name": "tent-wall",
+      "type": "cylinder",
+      "position": [
+        -4.28674453505245,
+        1.5,
+        -2.662625888370266
+      ],
+      "size": [
+        0.72,
+        3,
+        0.72
+      ]
+    },
+    {
+      "name": "tent-wall",
+      "type": "cylinder",
+      "position": [
+        -4.286744535052451,
+        1.5,
+        -3.337374111629731
+      ],
+      "size": [
+        0.72,
+        3,
+        0.72
+      ]
+    },
+    {
+      "name": "tent-wall",
+      "type": "cylinder",
+      "position": [
+        -4.181190657710009,
+        1.5,
+        -4.003815064580393
+      ],
+      "size": [
+        0.72,
+        3,
+        0.72
+      ]
+    },
+    {
+      "name": "tent-wall",
+      "type": "cylinder",
+      "position": [
+        -3.9726819897985335,
+        1.5,
+        -4.645538759169885
+      ],
+      "size": [
+        0.72,
+        3,
+        0.72
+      ]
+    },
+    {
+      "name": "tent-wall",
+      "type": "cylinder",
+      "position": [
+        -3.666352706722596,
+        1.5,
+        -5.246743828278581
+      ],
+      "size": [
+        0.72,
+        3,
+        0.72
+      ]
+    },
+    {
+      "name": "tent-wall",
+      "type": "cylinder",
+      "position": [
+        -3.2697456520801347,
+        1.5,
+        -5.792626607819788
+      ],
+      "size": [
+        0.72,
+        3,
+        0.72
+      ]
+    },
+    {
+      "name": "tent-wall",
+      "type": "cylinder",
+      "position": [
+        -2.7926266078197917,
+        1.5,
+        -6.269745652080132
+      ],
+      "size": [
+        0.72,
+        3,
+        0.72
+      ]
+    },
+    {
+      "name": "tent-wall",
+      "type": "cylinder",
+      "position": [
+        -2.246743828278579,
+        1.5,
+        -6.666352706722597
+      ],
+      "size": [
+        0.72,
+        3,
+        0.72
+      ]
+    },
+    {
+      "name": "tent-wall",
+      "type": "cylinder",
+      "position": [
+        -1.645538759169885,
+        1.5,
+        -6.9726819897985335
+      ],
+      "size": [
+        0.72,
+        3,
+        0.72
+      ]
+    },
+    {
+      "name": "tent-wall",
+      "type": "cylinder",
+      "position": [
+        -1.0038150645803958,
+        1.5,
+        -7.181190657710008
+      ],
+      "size": [
+        0.72,
+        3,
+        0.72
+      ]
+    },
+    {
+      "name": "tent-wall",
+      "type": "cylinder",
+      "position": [
+        -0.3373741116297359,
+        1.5,
+        -7.28674453505245
+      ],
+      "size": [
+        0.72,
+        3,
+        0.72
+      ]
+    },
+    {
+      "name": "tent-wall",
+      "type": "cylinder",
+      "position": [
+        0.33737411162973435,
+        1.5,
+        -7.28674453505245
+      ],
+      "size": [
+        0.72,
+        3,
+        0.72
+      ]
+    },
+    {
+      "name": "tent-wall",
+      "type": "cylinder",
+      "position": [
+        1.0038150645803943,
+        1.5,
+        -7.181190657710009
+      ],
+      "size": [
+        0.72,
+        3,
+        0.72
+      ]
+    },
+    {
+      "name": "tent-wall",
+      "type": "cylinder",
+      "position": [
+        1.6455387591698833,
+        1.5,
+        -6.972681989798534
+      ],
+      "size": [
+        0.72,
+        3,
+        0.72
+      ]
+    },
+    {
+      "name": "tent-wall",
+      "type": "cylinder",
+      "position": [
+        2.2467438282785777,
+        1.5,
+        -6.666352706722598
+      ],
+      "size": [
+        0.72,
+        3,
+        0.72
+      ]
+    },
+    {
+      "name": "tent-wall",
+      "type": "cylinder",
+      "position": [
+        2.7926266078197908,
+        1.5,
+        -6.2697456520801325
+      ],
+      "size": [
+        0.72,
+        3,
+        0.72
+      ]
+    },
+    {
+      "name": "tent-wall",
+      "type": "cylinder",
+      "position": [
+        3.2697456520801333,
+        1.5,
+        -5.7926266078197886
+      ],
+      "size": [
+        0.72,
+        3,
+        0.72
+      ]
+    },
+    {
+      "name": "tent-wall",
+      "type": "cylinder",
+      "position": [
+        3.666352706722595,
+        1.5,
+        -5.246743828278582
+      ],
+      "size": [
+        0.72,
+        3,
+        0.72
+      ]
+    },
+    {
+      "name": "tent-wall",
+      "type": "cylinder",
+      "position": [
+        3.9726819897985317,
+        1.5,
+        -4.645538759169889
+      ],
+      "size": [
+        0.72,
+        3,
+        0.72
+      ]
+    },
+    {
+      "name": "tent-wall",
+      "type": "cylinder",
+      "position": [
+        4.181190657710009,
+        1.5,
+        -4.003815064580392
+      ],
+      "size": [
+        0.72,
+        3,
+        0.72
+      ]
+    },
+    {
+      "name": "tent-wall",
+      "type": "cylinder",
+      "position": [
+        4.28674453505245,
+        1.5,
+        -3.3373741116297326
+      ],
+      "size": [
+        0.72,
+        3,
+        0.72
+      ]
+    },
+    {
+      "name": "seat",
+      "type": "box",
+      "position": [
+        -3.0,
+        0.65,
+        3.0
+      ],
+      "size": [
+        0.65,
+        1.3,
+        0.65
+      ]
+    },
+    {
+      "name": "seat",
+      "type": "box",
+      "position": [
+        -2.15,
+        0.65,
+        3.0
+      ],
+      "size": [
+        0.65,
+        1.3,
+        0.65
+      ]
+    },
+    {
+      "name": "seat",
+      "type": "box",
+      "position": [
+        -1.3,
+        0.65,
+        3.0
+      ],
+      "size": [
+        0.65,
+        1.3,
+        0.65
+      ]
+    },
+    {
+      "name": "seat",
+      "type": "box",
+      "position": [
+        -0.4500000000000002,
+        0.65,
+        3.0
+      ],
+      "size": [
+        0.65,
+        1.3,
+        0.65
+      ]
+    },
+    {
+      "name": "seat",
+      "type": "box",
+      "position": [
+        0.3999999999999999,
+        0.65,
+        3.0
+      ],
+      "size": [
+        0.65,
+        1.3,
+        0.65
+      ]
+    },
+    {
+      "name": "seat",
+      "type": "box",
+      "position": [
+        1.25,
+        0.65,
+        3.0
+      ],
+      "size": [
+        0.65,
+        1.3,
+        0.65
+      ]
+    },
+    {
+      "name": "seat",
+      "type": "box",
+      "position": [
+        2.0999999999999996,
+        0.65,
+        3.0
+      ],
+      "size": [
+        0.65,
+        1.3,
+        0.65
+      ]
+    },
+    {
+      "name": "seat",
+      "type": "box",
+      "position": [
+        2.95,
+        0.65,
+        3.0
+      ],
+      "size": [
+        0.65,
+        1.3,
+        0.65
+      ]
+    },
+    {
+      "name": "seat",
+      "type": "box",
+      "position": [
+        -3.0,
+        0.65,
+        3.8
+      ],
+      "size": [
+        0.65,
+        1.3,
+        0.65
+      ]
+    },
+    {
+      "name": "seat",
+      "type": "box",
+      "position": [
+        -2.15,
+        0.65,
+        3.8
+      ],
+      "size": [
+        0.65,
+        1.3,
+        0.65
+      ]
+    },
+    {
+      "name": "seat",
+      "type": "box",
+      "position": [
+        -1.3,
+        0.65,
+        3.8
+      ],
+      "size": [
+        0.65,
+        1.3,
+        0.65
+      ]
+    },
+    {
+      "name": "seat",
+      "type": "box",
+      "position": [
+        -0.4500000000000002,
+        0.65,
+        3.8
+      ],
+      "size": [
+        0.65,
+        1.3,
+        0.65
+      ]
+    },
+    {
+      "name": "seat",
+      "type": "box",
+      "position": [
+        0.3999999999999999,
+        0.65,
+        3.8
+      ],
+      "size": [
+        0.65,
+        1.3,
+        0.65
+      ]
+    },
+    {
+      "name": "seat",
+      "type": "box",
+      "position": [
+        1.25,
+        0.65,
+        3.8
+      ],
+      "size": [
+        0.65,
+        1.3,
+        0.65
+      ]
+    },
+    {
+      "name": "seat",
+      "type": "box",
+      "position": [
+        2.0999999999999996,
+        0.65,
+        3.8
+      ],
+      "size": [
+        0.65,
+        1.3,
+        0.65
+      ]
+    },
+    {
+      "name": "seat",
+      "type": "box",
+      "position": [
+        2.95,
+        0.65,
+        3.8
+      ],
+      "size": [
+        0.65,
+        1.3,
+        0.65
+      ]
+    },
+    {
+      "name": "seat",
+      "type": "box",
+      "position": [
+        -3.0,
+        0.65,
+        4.6
+      ],
+      "size": [
+        0.65,
+        1.3,
+        0.65
+      ]
+    },
+    {
+      "name": "seat",
+      "type": "box",
+      "position": [
+        -2.15,
+        0.65,
+        4.6
+      ],
+      "size": [
+        0.65,
+        1.3,
+        0.65
+      ]
+    },
+    {
+      "name": "seat",
+      "type": "box",
+      "position": [
+        -1.3,
+        0.65,
+        4.6
+      ],
+      "size": [
+        0.65,
+        1.3,
+        0.65
+      ]
+    },
+    {
+      "name": "seat",
+      "type": "box",
+      "position": [
+        -0.4500000000000002,
+        0.65,
+        4.6
+      ],
+      "size": [
+        0.65,
+        1.3,
+        0.65
+      ]
+    },
+    {
+      "name": "seat",
+      "type": "box",
+      "position": [
+        0.3999999999999999,
+        0.65,
+        4.6
+      ],
+      "size": [
+        0.65,
+        1.3,
+        0.65
+      ]
+    },
+    {
+      "name": "seat",
+      "type": "box",
+      "position": [
+        1.25,
+        0.65,
+        4.6
+      ],
+      "size": [
+        0.65,
+        1.3,
+        0.65
+      ]
+    },
+    {
+      "name": "seat",
+      "type": "box",
+      "position": [
+        2.0999999999999996,
+        0.65,
+        4.6
+      ],
+      "size": [
+        0.65,
+        1.3,
+        0.65
+      ]
+    },
+    {
+      "name": "seat",
+      "type": "box",
+      "position": [
+        2.95,
+        0.65,
+        4.6
+      ],
+      "size": [
+        0.65,
+        1.3,
+        0.65
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        -3.8,
+        1.4,
+        1
+      ],
+      "size": [
+        0.22,
+        2.8,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        3.8,
+        1.4,
+        1
+      ],
+      "size": [
+        0.22,
+        2.8,
+        0.22
+      ]
+    },
+    {
+      "name": "bunting-post",
+      "type": "cylinder",
+      "position": [
+        -7,
+        2,
+        2
+      ],
+      "size": [
+        0.2,
+        4,
+        0.2
+      ]
+    },
+    {
+      "name": "bunting-post",
+      "type": "cylinder",
+      "position": [
+        6,
+        2,
+        2
+      ],
+      "size": [
+        0.2,
+        4,
+        0.2
+      ]
+    }
+  ],
+  "backroads": [
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        2.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        7.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        9.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        2.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        7.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        9.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        1.05,
+        9.3
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        1.05,
+        9.3
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "crate",
+      "type": "box",
+      "position": [
+        8.5,
+        0.6000000000000001,
+        3.3
+      ],
+      "size": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "name": "barrel",
+      "type": "cylinder",
+      "position": [
+        5.5,
+        0.4,
+        3.2
+      ],
+      "size": [
+        0.6400000000000001,
+        0.8800000000000001,
+        0.6400000000000001
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        -8,
+        2.16,
+        -4
+      ],
+      "size": [
+        0.66,
+        4.32,
+        0.66
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        6,
+        2.3400000000000003,
+        -7
+      ],
+      "size": [
+        0.7150000000000001,
+        4.680000000000001,
+        0.7150000000000001
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        -9,
+        1.4400000000000002,
+        4
+      ],
+      "size": [
+        0.44000000000000006,
+        2.8800000000000003,
+        0.44000000000000006
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        8,
+        1.62,
+        0
+      ],
+      "size": [
+        0.49500000000000005,
+        3.24,
+        0.49500000000000005
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        -10,
+        1.05,
+        7
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        10,
+        1.05,
+        1
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        -7,
+        1.05,
+        -1
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        9,
+        1.05,
+        -5.5
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "building",
+      "type": "box",
+      "position": [
+        -3,
+        1.5,
+        -4
+      ],
+      "size": [
+        5,
+        3,
+        4
+      ]
+    },
+    {
+      "name": "bicycle",
+      "type": "box",
+      "position": [
+        -1,
+        0.8,
+        1.2
+      ],
+      "size": [
+        2,
+        1.6,
+        0.5
+      ]
+    },
+    {
+      "name": "bicycle",
+      "type": "box",
+      "position": [
+        1.3,
+        0.8,
+        1
+      ],
+      "size": [
+        2,
+        1.6,
+        0.5
+      ]
+    },
+    {
+      "name": "bicycle",
+      "type": "box",
+      "position": [
+        2.8,
+        0.8,
+        -0.5
+      ],
+      "size": [
+        2,
+        1.6,
+        0.5
+      ]
+    },
+    {
+      "name": "van",
+      "type": "box",
+      "position": [
+        3,
+        1.3,
+        -4
+      ],
+      "size": [
+        2.6,
+        2.6,
+        4.2
+      ]
+    },
+    {
+      "name": "crate",
+      "type": "box",
+      "position": [
+        2.5,
+        2.65,
+        -4
+      ],
+      "size": [
+        0.7,
+        0.7,
+        0.7
+      ]
+    },
+    {
+      "name": "crate",
+      "type": "box",
+      "position": [
+        3.5,
+        2.6999999999999997,
+        -4.5
+      ],
+      "size": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "name": "workbench",
+      "type": "box",
+      "position": [
+        -2,
+        0.8,
+        2.8
+      ],
+      "size": [
+        2.6,
+        1.6,
+        0.85
+      ]
+    },
+    {
+      "name": "workbench",
+      "type": "box",
+      "position": [
+        -2,
+        0.8,
+        4.5
+      ],
+      "size": [
+        2.6,
+        1.6,
+        0.85
+      ]
+    },
+    {
+      "name": "bunting-post",
+      "type": "cylinder",
+      "position": [
+        -7,
+        2,
+        2
+      ],
+      "size": [
+        0.2,
+        4,
+        0.2
+      ]
+    },
+    {
+      "name": "bunting-post",
+      "type": "cylinder",
+      "position": [
+        6,
+        2,
+        2
+      ],
+      "size": [
+        0.2,
+        4,
+        0.2
+      ]
+    }
+  ],
+  "learning": [
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        2.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        7.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        9.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        2.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        7.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        9.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        1.05,
+        9.3
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        1.05,
+        9.3
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "crate",
+      "type": "box",
+      "position": [
+        8.5,
+        0.6000000000000001,
+        3.3
+      ],
+      "size": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "name": "barrel",
+      "type": "cylinder",
+      "position": [
+        5.5,
+        0.4,
+        3.2
+      ],
+      "size": [
+        0.6400000000000001,
+        0.8800000000000001,
+        0.6400000000000001
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        -8,
+        2.16,
+        -4
+      ],
+      "size": [
+        0.66,
+        4.32,
+        0.66
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        6,
+        2.3400000000000003,
+        -7
+      ],
+      "size": [
+        0.7150000000000001,
+        4.680000000000001,
+        0.7150000000000001
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        -9,
+        1.4400000000000002,
+        4
+      ],
+      "size": [
+        0.44000000000000006,
+        2.8800000000000003,
+        0.44000000000000006
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        8,
+        1.62,
+        0
+      ],
+      "size": [
+        0.49500000000000005,
+        3.24,
+        0.49500000000000005
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        -10,
+        1.05,
+        7
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        10,
+        1.05,
+        1
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        -7,
+        1.05,
+        -1
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        9,
+        1.05,
+        -5.5
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "building",
+      "type": "box",
+      "position": [
+        -2,
+        1.5,
+        -4
+      ],
+      "size": [
+        5.5,
+        3,
+        4
+      ]
+    },
+    {
+      "name": "desk",
+      "type": "box",
+      "position": [
+        -1,
+        0.85,
+        1
+      ],
+      "size": [
+        2,
+        1.7,
+        0.8
+      ]
+    },
+    {
+      "name": "chair",
+      "type": "box",
+      "position": [
+        -1,
+        0.65,
+        2
+      ],
+      "size": [
+        0.7,
+        1.3,
+        0.75
+      ]
+    },
+    {
+      "name": "bookcase",
+      "type": "box",
+      "position": [
+        -3.6,
+        1.4,
+        0
+      ],
+      "size": [
+        1.5,
+        2.8,
+        1.5
+      ]
+    },
+    {
+      "name": "bookcase",
+      "type": "box",
+      "position": [
+        3.6,
+        1.4,
+        0
+      ],
+      "size": [
+        1.5,
+        2.8,
+        1.5
+      ]
+    },
+    {
+      "name": "reading-table",
+      "type": "box",
+      "position": [
+        2,
+        0.9,
+        3
+      ],
+      "size": [
+        2,
+        1.8,
+        1.2
+      ]
+    },
+    {
+      "name": "bunting-post",
+      "type": "cylinder",
+      "position": [
+        -7,
+        2,
+        2
+      ],
+      "size": [
+        0.2,
+        4,
+        0.2
+      ]
+    },
+    {
+      "name": "bunting-post",
+      "type": "cylinder",
+      "position": [
+        6,
+        2,
+        2
+      ],
+      "size": [
+        0.2,
+        4,
+        0.2
+      ]
+    }
+  ],
+  "oclock": [
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        2.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        7.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        0.6,
+        9.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        2.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        7.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "pier-post",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        0.6,
+        9.5
+      ],
+      "size": [
+        0.3,
+        1.3,
+        0.3
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        4.8,
+        1.05,
+        9.3
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        9.2,
+        1.05,
+        9.3
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "crate",
+      "type": "box",
+      "position": [
+        8.5,
+        0.6000000000000001,
+        3.3
+      ],
+      "size": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    {
+      "name": "barrel",
+      "type": "cylinder",
+      "position": [
+        5.5,
+        0.4,
+        3.2
+      ],
+      "size": [
+        0.6400000000000001,
+        0.8800000000000001,
+        0.6400000000000001
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        -8,
+        2.16,
+        -4
+      ],
+      "size": [
+        0.66,
+        4.32,
+        0.66
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        6,
+        2.3400000000000003,
+        -7
+      ],
+      "size": [
+        0.7150000000000001,
+        4.680000000000001,
+        0.7150000000000001
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        -9,
+        1.4400000000000002,
+        4
+      ],
+      "size": [
+        0.44000000000000006,
+        2.8800000000000003,
+        0.44000000000000006
+      ]
+    },
+    {
+      "name": "tree",
+      "type": "cylinder",
+      "position": [
+        8,
+        1.62,
+        0
+      ],
+      "size": [
+        0.49500000000000005,
+        3.24,
+        0.49500000000000005
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        -10,
+        1.05,
+        7
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        10,
+        1.05,
+        1
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        -7,
+        1.05,
+        -1
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "lantern",
+      "type": "cylinder",
+      "position": [
+        9,
+        1.05,
+        -5.5
+      ],
+      "size": [
+        0.22,
+        2.1,
+        0.22
+      ]
+    },
+    {
+      "name": "building",
+      "type": "box",
+      "position": [
+        -2,
+        1.7,
+        -4
+      ],
+      "size": [
+        7,
+        3.4,
+        4
+      ]
+    },
+    {
+      "name": "desk",
+      "type": "box",
+      "position": [
+        -3,
+        0.85,
+        1.3
+      ],
+      "size": [
+        2,
+        1.7,
+        0.8
+      ]
+    },
+    {
+      "name": "chair",
+      "type": "box",
+      "position": [
+        -3,
+        0.65,
+        2.3
+      ],
+      "size": [
+        0.7,
+        1.3,
+        0.75
+      ]
+    },
+    {
+      "name": "desk",
+      "type": "box",
+      "position": [
+        0,
+        0.85,
+        1.3
+      ],
+      "size": [
+        2,
+        1.7,
+        0.8
+      ]
+    },
+    {
+      "name": "chair",
+      "type": "box",
+      "position": [
+        0,
+        0.65,
+        2.3
+      ],
+      "size": [
+        0.7,
+        1.3,
+        0.75
+      ]
+    },
+    {
+      "name": "desk",
+      "type": "box",
+      "position": [
+        3,
+        0.85,
+        1.3
+      ],
+      "size": [
+        2,
+        1.7,
+        0.8
+      ]
+    },
+    {
+      "name": "chair",
+      "type": "box",
+      "position": [
+        3,
+        0.65,
+        2.3
+      ],
+      "size": [
+        0.7,
+        1.3,
+        0.75
+      ]
+    },
+    {
+      "name": "board",
+      "type": "box",
+      "position": [
+        4,
+        1.5,
+        -2
+      ],
+      "size": [
+        2.6,
+        3,
+        0.25
+      ]
+    },
+    {
+      "name": "bunting-post",
+      "type": "cylinder",
+      "position": [
+        -7,
+        2,
+        2
+      ],
+      "size": [
+        0.2,
+        4,
+        0.2
+      ]
+    },
+    {
+      "name": "bunting-post",
+      "type": "cylinder",
+      "position": [
+        6,
+        2,
+        2
+      ],
+      "size": [
+        0.2,
+        4,
+        0.2
+      ]
+    }
+  ]
+}

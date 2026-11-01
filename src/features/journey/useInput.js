@@ -1,14 +1,19 @@
 import { useEffect, useRef } from "react";
+import { clampZoom } from "./physics.js";
 
 /** Collect physical input without React updates in the animation loop. */
-export const useInput = (onAction) => {
+export const useInput = (onAction, onTalk) => {
   const input = useRef({
     keys: new Set(),
     touch: { x: 0, y: 0 },
     orbit: 0,
+    zoom: 1,
+    jump: false,
     action: onAction,
+    talk: onTalk,
   });
   input.current.action = onAction;
+  input.current.talk = onTalk;
   useEffect(() => {
     const controls = new Set([
       "KeyW",
@@ -25,6 +30,11 @@ export const useInput = (onAction) => {
       "ShiftLeft",
       "ShiftRight",
       "KeyE",
+      "KeyF",
+      "Equal",
+      "Minus",
+      "NumpadAdd",
+      "NumpadSubtract",
     ]);
     const down = (event) => {
       if (
@@ -37,11 +47,17 @@ export const useInput = (onAction) => {
       if (controls.has(event.code)) event.preventDefault();
       input.current.keys.add(event.code);
       if (event.code === "KeyE" && !event.repeat) input.current.action();
+      if (event.code === "KeyF" && !event.repeat) input.current.talk?.();
+      if (["Equal", "NumpadAdd"].includes(event.code))
+        input.current.zoom = clampZoom(input.current.zoom / 1.12);
+      if (["Minus", "NumpadSubtract"].includes(event.code))
+        input.current.zoom = clampZoom(input.current.zoom * 1.12);
     };
     const up = (event) => input.current.keys.delete(event.code);
     const clear = () => {
       input.current.keys.clear();
       input.current.touch = { x: 0, y: 0 };
+      input.current.jump = false;
     };
     window.addEventListener("keydown", down);
     window.addEventListener("keyup", up);

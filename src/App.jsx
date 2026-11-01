@@ -7,6 +7,8 @@ import {
   useState,
 } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+import { Conversation } from "./components/Conversation.jsx";
+import { clampZoom } from "./features/journey/physics.js";
 import { Journal } from "./components/Journal.jsx";
 import { TouchControls } from "./components/TouchControls.jsx";
 import { useInput } from "./features/journey/useInput.js";
@@ -21,6 +23,7 @@ export const App = () => {
   const [mode, setMode] = useState("overview");
   const [islandId, setIslandId] = useState("atelier");
   const [destination, setDestination] = useState(null);
+  const [conversation, setConversation] = useState(null);
   const [journal, setJournal] = useState(null);
   const [mapOpen, setMapOpen] = useState(false);
   const [night, setNight] = useState(false);
@@ -39,8 +42,13 @@ export const App = () => {
   });
   const [sceneError, setSceneError] = useState(false);
   const actionRef = useRef(null),
-    drag = useRef(null);
-  const input = useInput(() => actionRef.current?.());
+    drag = useRef(new Map()),
+    pinch = useRef(null);
+  const talk = () => {
+    if (mode === "walking" && status.canTalk && !journal && !help && !mapOpen)
+      setConversation(islandId);
+  };
+  const input = useInput(() => actionRef.current?.(), talk);
   const current = islands.find((i) => i.id === islandId);
   const intro = mode === "overview";
   const busy = mode === "takeoff" || mode === "landing" || Boolean(destination);
@@ -63,6 +71,7 @@ export const App = () => {
   const travel = (id) => {
     if (busy) return;
     setJournal(null);
+    setConversation(null);
     setMapOpen(false);
     if (id === islandId && (mode === "walking" || intro)) {
       setMode("walking");
@@ -71,15 +80,40 @@ export const App = () => {
     setDestination(id);
     if (mode === "walking" || intro) setMode("takeoff");
   };
+  const changeZoom = (factor) => {
+    input.current.zoom = clampZoom(input.current.zoom * factor);
+  };
   const pointerDown = (event) => {
-    if (intro || event.target.closest("button")) return;
-    drag.current = event.clientX;
+    if (
+      event.target.closest("button") ||
+      conversation ||
+      journal ||
+      help ||
+      mapOpen
+    )
+      return;
+    drag.current.set(event.pointerId, [event.clientX, event.clientY]);
     event.currentTarget.setPointerCapture(event.pointerId);
+    if (drag.current.size === 2) {
+      const [a, b] = [...drag.current.values()];
+      pinch.current = Math.hypot(a[0] - b[0], a[1] - b[1]);
+    }
   };
   const pointerMove = (event) => {
-    if (drag.current === null) return;
-    input.current.orbit -= (event.clientX - drag.current) * 0.006;
-    drag.current = event.clientX;
+    const previous = drag.current.get(event.pointerId);
+    if (!previous) return;
+    drag.current.set(event.pointerId, [event.clientX, event.clientY]);
+    if (drag.current.size === 2) {
+      const [a, b] = [...drag.current.values()];
+      const distance = Math.hypot(a[0] - b[0], a[1] - b[1]);
+      if (pinch.current && distance > 10) changeZoom(pinch.current / distance);
+      pinch.current = distance;
+    } else if (!intro)
+      input.current.orbit -= (event.clientX - previous[0]) * 0.006;
+  };
+  const pointerUp = (event) => {
+    drag.current.delete(event.pointerId);
+    pinch.current = null;
   };
   return (
     <main
@@ -93,11 +127,12 @@ export const App = () => {
         aria-label="Archipel flottant interactif"
         onPointerDown={pointerDown}
         onPointerMove={pointerMove}
-        onPointerUp={() => {
-          drag.current = null;
-        }}
-        onPointerCancel={() => {
-          drag.current = null;
+        onPointerUp={pointerUp}
+        onPointerCancel={pointerUp}
+        onLostPointerCapture={pointerUp}
+        onWheel={(e) => {
+          if (!conversation && !journal && !help && !mapOpen)
+            changeZoom(Math.exp(e.deltaY * 0.001));
         }}
       >
         <ErrorBoundary
@@ -129,7 +164,8 @@ export const App = () => {
                 telemetry={setStatus}
                 night={night}
                 reduced={reduced}
-                paused={Boolean(journal || help || mapOpen)}
+                paused={Boolean(journal || conversation || help || mapOpen)}
+                onTalk={setConversation}
                 onExhibit={setJournal}
               />
             </Suspense>
@@ -142,6 +178,32 @@ export const App = () => {
         </ErrorBoundary>
       </div>
       <div className="vignette" />
+      <div className="camera-controls" aria-label="Réglage de la caméra">
+        <button
+          onClick={() => changeZoom(1 / 1.2)}
+          aria-label="Zoomer"
+          title="Zoomer (+)"
+        >
+          +
+        </button>
+        <button
+          onClick={() => {
+            input.current.zoom = 1;
+            input.current.orbit = 0;
+          }}
+          aria-label="Recentrer la caméra"
+          title="Vue initiale"
+        >
+          ⌾
+        </button>
+        <button
+          onClick={() => changeZoom(1.2)}
+          aria-label="Dézoomer"
+          title="Dézoomer (−)"
+        >
+          −
+        </button>
+      </div>
       <header className="topbar">
         <a href="/" className="brand" aria-label="Zeppelin Journey, accueil">
           <span className="brand-mark">✣</span>
@@ -271,10 +333,12 @@ export const App = () => {
                   <span>↑</span>
                 </button>
                 <button
-                  className="secondary-button"
-                  onClick={() => setJournal(islandId)}
+                  className="secondary-button talk-button"
+                  onClick={talk}
+                  disabled={!status.canTalk}
                 >
-                  Découvrir l’escale ↗
+                  <kbd>F</kbd>{" "}
+                  {status.canTalk ? "Parler au guide" : "Approchez du guide"}
                 </button>
               </>
             ) : busy ? (
@@ -306,7 +370,9 @@ export const App = () => {
               </>
             )}
           </div>
-          {!busy && <TouchControls input={input} />}
+          {!busy && (
+            <TouchControls input={input} walking={mode === "walking"} />
+          )}
         </>
       )}
       <footer className="bottom-bar">
@@ -352,6 +418,12 @@ export const App = () => {
             <dd>Marcher · piloter</dd>
             <dt>Glisser la souris</dt>
             <dd>Regarder autour de soi</dd>
+            <dt>Molette / + − / pincement</dt>
+            <dd>Zoomer · dézoomer</dd>
+            <dt>F</dt>
+            <dd>Parler au guide à proximité</dd>
+            <dt>Espace à pied</dt>
+            <dd>Sauter</dd>
             <dt>E</dt>
             <dd>Embarquer · atterrir</dd>
             <dt>Espace / Maj en vol</dt>
@@ -372,8 +444,15 @@ export const App = () => {
           <a href="/projects.html">Lire le carnet sans 3D ↗</a>
         </section>
       )}
+      <Conversation
+        selection={conversation}
+        onClose={() => setConversation(null)}
+        onJournal={(id) => {
+          setConversation(null);
+          setJournal(id);
+        }}
+      />
       <Journal selection={journal} onClose={closeJournal} onTravel={travel} />
     </main>
   );
 };
-

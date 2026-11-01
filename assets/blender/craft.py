@@ -75,7 +75,9 @@ def template(kind):
     bm.free(); CACHE[kind]=(verts,faces); return verts,faces
 
 class Batch:
-    def __init__(self,name): self.name=name; self.data=defaultdict(lambda:[[],[],[]]); self.objects=[]
+    def __init__(self,name): self.name=name; self.data=defaultdict(lambda:[[],[],[]]); self.objects=[]; self.colliders=[]; self.parts=[]
+    def collider(self,name,pos,size,kind='box'):
+        self.colliders.append({'name':name,'type':kind,'position':list(pos),'size':list(size)})
     def mesh(self,verts,faces,mat,smooth=False):
         vs,fs,sm=self.data[mat]; offset=len(vs)
         unique={}
@@ -127,7 +129,19 @@ def export(objects,path):
     bpy.ops.export_scene.gltf(filepath=str(path),export_format='GLB',use_selection=True,use_active_scene=True,export_apply=True,export_yup=True,export_animations=False,export_cameras=False,export_lights=False,export_draco_mesh_compression_enable=True,export_draco_mesh_compression_level=6)
     print('EXPORTED',str(path),os.path.getsize(path))
 
+def moving_part(batch, name, pivot, draw):
+    """Keep a named pivot in glTF while batching the moving part by material."""
+    part=Batch(batch.name+'-'+name); draw(part)
+    root=bpy.data.objects.new('ANIM-'+name,None); bpy.context.scene.collection.objects.link(root)
+    p=Vector((pivot[0],-pivot[2],pivot[1])); root.location=p
+    objects=part.finish(parent=root)
+    for obj in objects:
+        for vertex in obj.data.vertices: vertex.co-=p
+    batch.parts.extend([root,*objects])
+    return root
+
 def lantern(b,x,z,h=2.1):
+    b.collider('lantern', (x,h/2,z),(.22,h,.22),'cylinder')
     b.beam((x,0,z),(x,h,z),.065,'iron')
     b.box((x,h+.06,z),(.5,.12,.5),'brass'); b.box((x,h-.48,z),(.38,.1,.38),'brass')
     b.ball((x,h-.23,z),(.12,.24,.12),'lamp')
@@ -136,6 +150,7 @@ def lantern(b,x,z,h=2.1):
     b.ball((x,h+.18,z),(.07,.08,.07),'brass')
 
 def tree(b,x,z,scale=1,seed=1):
+    b.collider('tree',(x,1.8*scale,z),(.55*scale,3.6*scale,.55*scale),'cylinder')
     rng=random.Random(seed); h=3.7*scale
     b.beam((x,0,z),(x+.15*scale,h*.8,z),.18*scale,'darkwood')
     for i in range(8):
@@ -159,12 +174,14 @@ def flowerbed(b,x,z,radius=1,seed=1):
         b.ball((px,h+.02,pz),(.035,.03,.035),'flower')
 
 def crate(b,x,y,z,s=.8):
+    b.collider('crate',(x,y+s/2,z),(s,s,s))
     b.box((x,y+s/2,z),(s,s,s),'wood')
     for side in [-1,1]:
         for t in [-.36,.36]: b.box((x+t*s,y+s*.5,z+side*s*.51),(.09*s,s,.08),'oak')
         b.beam((x-s*.4,y+s*.1,z+side*s*.52),(x+s*.4,y+s*.9,z+side*s*.52),.045,'oak',4)
 
 def barrel(b,x,z,s=1):
+    b.collider('barrel',(x,.5*s,z),(.8*s,1.1*s,.8*s),'cylinder')
     b.ball((x,.5*s,z),(.38*s,.55*s,.38*s),'wood')
     for h in [.17,.8]: b.ring((x,h*s,z),.35*s,.025,'iron')
     b.box((x,1.02*s,z),(.58*s,.06,.58*s),'oak')
@@ -174,6 +191,7 @@ def dock(b):
     for side in [-1,1]:
         for z in [2.5,5,7.5,9.5]:
             x=7+side*2.2; b.beam((x,-2,z),(x,1.05,z),.12,'darkwood'); b.ball((x,1.09,z),(.16,.12,.16),'brass')
+            b.collider('pier-post',(x,.6,z),(.3,1.3,.3),'cylinder')
         for k in range(14):
             z=2.5+k*.5; y=.9-.15*math.sin(k/14*math.pi)
             b.beam((7+side*2.2,y,z),(7+side*2.2,.9-.15*math.sin((k+1)/14*math.pi),z+.5),.025,'oak')
@@ -214,7 +232,7 @@ def base(b,r=13,seed=1):
             yy=-k*.3; px=x+math.sin(k)*.15;pz=z+math.cos(k)*.15
             b.shape('leaf',(px,yy,pz),(.3,.16,.23),'leaf' if k%2 else 'leafDark')
     for i,(x,z,s) in enumerate([(-8,-4,1.2),(6,-7,1.3),(-9,4,.8),(8,0,.9)]): tree(b,x,z,s,seed*10+i)
-    for x,z in [(-4,4),(3,1),(-7,-1),(4,-6)]: lantern(b,x,z)
+    for x,z in [(-10,7),(10,1),(-7,-1),(9,-5.5)]: lantern(b,x,z)
     # Wild lower gardens fill the sides without obstructing the central walk.
     for side in [-1,1]:
         for j in range(5):
@@ -224,6 +242,7 @@ def base(b,r=13,seed=1):
                 b.ball((x+rng.uniform(-.9,.9),.3,z+rng.uniform(-.6,.6)),(.3,.4,.35),'leafDark' if k%2 else 'leaf')
 
 def building(b,x,z,w=5,d=4,h=3,wall='stone',roof='tile'):
+    b.collider('building',(x,h/2,z),(w,h,d))
     b.box((x,h/2,z),(w,h,d),wall)
     # Individual front masonry blocks and corner quoins.
     for row in range(int(h/.4)):
@@ -259,6 +278,7 @@ def bunting(b,a,c):
         else: b.ball(p+Vector((0,-.1,0)),(.06,.08,.06),'lamp')
 
 def bicycle(b,x,z):
+    b.collider('bicycle',(x,.8,z),(2,1.6,.5))
     for dx in [-.7,.7]:
         b.ring((x+dx,.55,z),.5,.045,'iron','z',24)
         for i in range(8):

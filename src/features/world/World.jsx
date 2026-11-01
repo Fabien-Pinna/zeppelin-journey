@@ -6,6 +6,7 @@ import * as THREE from "three";
 import { Scenery } from "./Scenery.jsx";
 import { Journey } from "../journey/Journey.jsx";
 import { createPendulum, stepPendulum } from "../journey/physics.js";
+import { Sunlight, LanternLighting } from './Lighting.jsx';
 const Simulation = ({ simulation, paused, reduced }) => {
   useFrame((_, delta) => {
     if (!paused && !reduced) {
@@ -34,32 +35,27 @@ const Atmosphere = ({ night }) => {
   }, [scene, sky, size.width, size.height]);
   return (
     <>
-      <fog attach="fog" args={[night ? "#657b91" : "#d3d9c4", 90, 240]} />
+      <fog attach="fog" args={[night ? "#51698b" : "#b4c6d2", 65, 220]} />
       <hemisphereLight
-        args={[night ? "#9eafda" : "#fff1d2", "#95a48e", night ? 0.9 : 1.8]}
-      />
-      <directionalLight
-        position={[-35, 55, 35]}
-        intensity={night ? 1 : 3}
-        color={night ? "#b4c5f5" : "#ffe0ad"}
-        castShadow
-        shadow-mapSize={[2048, 2048]}
-        shadow-camera-left={-60}
-        shadow-camera-right={60}
-        shadow-camera-top={60}
-        shadow-camera-bottom={-60}
-        shadow-camera-far={180}
-        shadow-normalBias={0.12}
+        args={[night ? "#8eabda" : "#cedfec", "#a99b7f", night ? 0.5 : 1.05]}
       />
       <directionalLight
         position={[30, 20, -30]}
-        intensity={night ? 0.6 : 1}
+        intensity={night ? 0.35 : .55}
         color="#c3e5ef"
       />
-      <Environment resolution={64} frames={1} environmentIntensity={0.7}>
+      <Environment key={night ? 'evening' : 'day'} resolution={128} frames={1} environmentIntensity={night ? .25 : .45}>
         <mesh scale={100}>
           <sphereGeometry args={[1, 16, 16]} />
-          <meshBasicMaterial color="#ddd4ba" side={THREE.BackSide} />
+          <meshBasicMaterial color={night ? '#617899' : '#b8d0df'} side={THREE.BackSide} />
+        </mesh>
+        <mesh position={[-15, 25, 10]} rotation={[Math.PI / 2, .3, 0]}>
+          <planeGeometry args={[30, 20]} />
+          <meshBasicMaterial color={night ? '#acb9d4' : '#fff0d5'} side={THREE.DoubleSide} toneMapped={false} />
+        </mesh>
+        <mesh position={[0, -20, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+          <planeGeometry args={[80, 80]} />
+          <meshBasicMaterial color="#625a45" side={THREE.DoubleSide} />
         </mesh>
       </Environment>
     </>
@@ -110,6 +106,8 @@ export const World = (props) => {
       >
         <Suspense fallback={null}>
           <Atmosphere night={props.night} />
+          <Sunlight night={props.night} islandId={props.islandId} mode={props.mode} />
+          <LanternLighting night={props.night} />
           <Simulation
             simulation={simulation}
             paused={props.paused}

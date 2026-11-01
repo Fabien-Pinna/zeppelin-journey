@@ -12,17 +12,20 @@ def airship():
         mat=o.data.materials[0].name if o.data.materials else ''
         key=('cream' if 'Canvas' in mat else 'darkwood' if 'WoodDark' in mat else 'oak' if 'WoodLight' in mat else 'brass' if any(x in mat for x in ['Brass','Gold','Copper']) else 'glass' if 'Glass' in mat else 'iron' if any(x in mat for x in ['Iron','Steel','Metal']) else 'wood')
         if 'TailFin' in o.name: key='teal'
+        if 'Envelope_Seam' in o.name: key='brass'
+        if 'Rigging' in o.name and 'Rope' in mat: key='cream'
+        if 'Copper' in mat: key='copper'
         if 'LanternGlass' in o.name:key='lamp'
         vertices=[]
         for v in o.data.vertices:
             p=o.matrix_world@v.co;vertices.append((p.x*.55,(p.z+9)*.55,-p.y*.55))
         faces=[tuple(p.vertices) for p in o.data.polygons]
         if 'Envelope_Hull' in o.name:
-            groups={'cream':[],'teal':[]}
+            groups={'canvas':[],'cream':[]}
             for p in o.data.polygons:
                 center=sum((Vector(vertices[i]) for i in p.vertices),Vector())/len(p.vertices)
-                stripe=False
-                groups['teal' if stripe else 'cream'].append(tuple(p.vertices))
+                stripe=int((center.z+12)*.7)%3==0
+                groups['cream' if stripe else 'canvas'].append(tuple(p.vertices))
             for k,fs in groups.items():b.mesh(vertices,fs,k,True)
         else:b.mesh(vertices,faces,key,True)
     # Glazed observation cabin, handrails, boarding steps and travel luggage.
@@ -35,6 +38,12 @@ def airship():
         for z in [.2,1.2,2.2,3.2]:
             b.ball((side*.77,2.8,z),(.025,.17,.22),'lamp')
     b.box((0,3.23,1.7),(1.85,.2,4.5),'teal')
+    for z in [.2,1.4,2.6]:
+        for side in [-1,1]:
+            b.box((side*.45,2.4,z),(.38,.12,.52),'leather')
+            b.box((side*.6,2.68,z),(.07,.55,.52),'teal')
+            b.beam((side*.45,2.22,z),(side*.45,2.4,z),.04,'brass',12)
+        b.box((0,2.6,z),(.38,.06,.45),'oak')
     for z in [-.5,3.9]:
         b.beam((-.85,3.25,z),(.85,3.25,z),.055,'brass')
     for i in range(3):b.box((1.05+i*.23,1.92-i*.17,3.5),(.32,.12,1.1),'oak')

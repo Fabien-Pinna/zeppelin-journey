@@ -3,6 +3,7 @@ import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import { stepPropellers } from "../journey/flight.js";
+import { scenicMaterial } from './materials.js';
 /** Reworked passenger airship, sharing the dioramas' materials. */
 export const Zeppelin = ({ flying, reduced, simulation }) => {
   const ref = useRef();
@@ -14,7 +15,8 @@ export const Zeppelin = ({ flying, reduced, simulation }) => {
     copy.traverse((o) => {
       if (/^ANIM-propeller-[LR](?:[._]?\d+)?$/.test(o.name)) rotors.push(o);
       if (o.isMesh) {
-        o.castShadow = true;
+        o.material = scenicMaterial(o.material);
+        o.castShadow = !o.material.transparent;
         o.receiveShadow = true;
       }
     });

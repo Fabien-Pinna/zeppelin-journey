@@ -38,6 +38,13 @@ test("every requested career chapter has a distinct model and narrative", () => 
       bytes.toString("utf8", 20, 20 + bytes.readUInt32LE(12)),
     );
     assert.ok(gltf.extensionsRequired.includes("KHR_draco_mesh_compression"));
+    assert.ok(gltf.extensionsRequired.includes("EXT_texture_webp"));
+    for (const name of ["wood", "cliff", "cliffWarm", "cliffShade"]) {
+      const material = gltf.materials.find((m) => m.name === `MAT-Journey-${name}`);
+      assert.ok(material?.pbrMetallicRoughness.baseColorTexture, `${island.id}: ${name} color map`);
+      assert.ok(material?.pbrMetallicRoughness.metallicRoughnessTexture, `${island.id}: ${name} roughness map`);
+      assert.ok(material?.normalTexture, `${island.id}: ${name} normal map`);
+    }
     assert.ok(gltf.meshes.length > 10);
     assert.ok(
       !gltf.nodes.some((n) => n.name === "Cube"),

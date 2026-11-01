@@ -1,9 +1,9 @@
 """Detailed original cast, keeping the existing gameplay hand/foot contract."""
-import math
+import math, random
 import bpy
 from mathutils import Vector
 from craft import OUT, export
-from organic import Organic, detail_palette
+from organic import Organic, detail_palette, catmull
 
 
 def character(asset='traveller',backpack=True):
@@ -80,7 +80,7 @@ def character(asset='traveller',backpack=True):
         # A swept hairstyle, asymmetrical locks and fine strand ridges.
         verts=[];faces=[];segments=48;rings=14
         def scalp(a,t,extra=0):
-            end=1.43-.24*math.sin(a) # Higher front hairline, lower nape.
+            end=1.38-.24*math.sin(a)+.055*math.sin(a*5+.4)
             phi=t*end
             return ((.204+extra)*math.sin(phi)*math.cos(a),2.015+(.212+extra)*math.cos(phi),-.04+(.181+extra)*math.sin(phi)*math.sin(a))
         for j in range(rings+1):
@@ -88,16 +88,31 @@ def character(asset='traveller',backpack=True):
         for j in range(rings):
             for i in range(segments):faces.append((j*segments+i,j*segments+(i+1)%segments,(j+1)*segments+(i+1)%segments,(j+1)*segments+i))
         b.mesh(verts,faces,'hairDetail',True)
-        for i in range(32):
-            a=i*math.tau/32
-            points=[scalp(a+.5*(1-t),t,.008+.008*math.sin(i*2.4)) for t in [.15,.35,.57,.78,1.04]]
-            b.curve(points,.022+.006*math.sin(i*1.7),'hairDetail',10,taper=.6)
-            if i%2==0:b.curve([scalp(a+.5*(1-t)-.03,t,.026) for t in [.22,.43,.65,.84,.99]],.003,'hairLight',6,taper=.7)
-        # A few irregular swept forelocks break the cap silhouette.
-        for i in range(7):
-            t=i/6
-            points=[(-.13+t*.12,2.17,-.065),(-.10+t*.13,2.25+.016*math.sin(i),.015),(-.025+t*.15,2.22,.10),(.01+t*.15,2.10+.04*t,.148)]
-            b.curve(points,.025,'hairDetail',10,taper=.65)
+        def lock(points,width,depth,mat='hairDetail'):
+            points=catmull(points,5);verts=[];sides=12
+            for j,p in enumerate(points):
+                t=j/(len(points)-1)
+                tangent=(points[min(j+1,len(points)-1)]-points[max(j-1,0)]).normalized()
+                normal=(p-Vector((0,2.015,-.04))).normalized()
+                side=tangent.cross(normal).normalized()
+                up=side.cross(tangent).normalized()
+                taper=max(.025,math.sin(math.pi*t))**.55
+                for k in range(sides):
+                    a=k*math.tau/sides
+                    verts.append(p+(side*math.cos(a)*width+up*math.sin(a)*depth)*taper)
+            faces=[(j*sides+k,j*sides+(k+1)%sides,(j+1)*sides+(k+1)%sides,(j+1)*sides+k) for j in range(len(points)-1) for k in range(sides)]
+            b.mesh(verts,faces,mat,True)
+        rng=random.Random(72)
+        # Overlapping broad tapered locks, with uneven swept tips rather than a comb-shaped cap.
+        for i in range(23):
+            a=i*math.tau/23+rng.uniform(-.08,.08)
+            tip=rng.uniform(.96,1.12)
+            points=[scalp(a+.8*(1-t),t,.012+.014*math.sin(math.pi*t)) for t in [.12,.35,.6,.85,tip]]
+            lock(points,rng.uniform(.027,.043),.015)
+        for i in range(10):
+            t=i/9
+            points=[(-.16+t*.17,2.13,-.095),(-.13+t*.19,2.215+.012*math.sin(i*.7),-.025),(-.04+t*.20,2.24+.008*math.sin(i),.065),(.055+t*.14,2.105+.05*t,.15)]
+            lock(points,.037,.010,'hairDetail')
     part('Head',(0,1.63,0),head)
 
     for s,label in [(-1,'Left'),(1,'Right')]:

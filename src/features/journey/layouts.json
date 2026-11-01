@@ -2699,20 +2699,6 @@
       ]
     },
     {
-      "name": "tent-pole",
-      "type": "cylinder",
-      "position": [
-        0,
-        3.4,
-        -3
-      ],
-      "size": [
-        0.2,
-        6.8,
-        0.2
-      ]
-    },
-    {
       "name": "tent-wall",
       "type": "cylinder",
       "position": [
@@ -3088,6 +3074,20 @@
         0.72,
         3,
         0.72
+      ]
+    },
+    {
+      "name": "tent-pole",
+      "type": "cylinder",
+      "position": [
+        0,
+        3.4,
+        -3
+      ],
+      "size": [
+        0.2,
+        6.8,
+        0.2
       ]
     },
     {

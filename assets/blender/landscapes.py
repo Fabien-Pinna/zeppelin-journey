@@ -1,5 +1,6 @@
 """Distinct, authored places; source facts and reference geometry in ASSETS.md."""
 import bpy, math, random, json
+import botany
 from mathutils import Matrix, Vector
 from craft import Batch, ROOT, building, crate, barrel, tree, lantern, moving_part, material, MATS
 from organic import Organic, detail_palette
@@ -21,24 +22,10 @@ def sign(b,text,x,y,z,width=4,color='cream',posts=False):
     bpy.context.view_layer.objects.active=obj;obj.select_set(True);bpy.ops.object.convert(target='MESH');obj.select_set(False);b.parts.append(obj)
 
 def orchard_tree(b,x,z,kind,seed,s=1):
-    o=Organic(kind);rng=random.Random(seed);h=2.9*s
-    o.curve([(x,0,z),(x-.18*s,h*.34,z+.1),(x+.12*s,h*.68,z),(x,h,z)],.17*s,'darkwood',12,taper=.15)
-    for i in range(7):
-        a=i*2.4;ex=x+math.cos(a)*1.1*s;ez=z+math.sin(a)*1.1*s
-        o.curve([(x,h*.4,z),(x+math.cos(a)*.45*s,h*.75,z+math.sin(a)*.45*s),(ex,h*(.83+.1*(i%3)),ez)],.065*s,'wood',9,taper=.3)
-    for i in range(145):
-        a=rng.random()*math.tau;r=math.sqrt(rng.random())*1.45*s
-        p=(x+math.cos(a)*r,h+rng.uniform(-.35,.5)*s,z+math.sin(a)*r)
-        o.ball(p,((.29 if kind=='olive' else .32)*s,.16*s,.25*s),'oliveLeaf' if kind=='olive' and i%3 else 'oliveDark' if kind=='olive' else 'leaf',segments=10,rings=6)
-        for j in range(2):
-            q=(p[0]+rng.uniform(-.17,.17)*s,p[1]+.12*s,p[2]+rng.uniform(-.17,.17)*s)
-            o.ball(q,(.14*s,.018*s,.04*s),'oliveLeaf' if kind=='olive' else 'leafLight',rot=(.2,a,0),segments=8,rings=4)
-        if i%4==0:
-            q=(p[0],p[1]-.18*s,p[2]+.1*s)
-            o.beam(p,q,.008*s,'wood',5)
-            o.ball(q,(.053*s,.06*s,.053*s),'oliveDark' if kind=='olive' else 'cherry',segments=10,rings=6)
-            if kind=='cherry':o.ball((q[0]+.085*s,q[1]-.02*s,q[2]),(.055*s,.062*s,.055*s),'cherry',segments=10,rings=6)
-    transfer(o,b);b.collider(kind+'-trunk',(x,h/2,z),(.5*s,h,.5*s),'cylinder')
+    import botany
+    botany.tree(b,x,z,s,seed,kind)
+    b.collider(kind+'-trunk',(x,2.9*s/2,z),(.5*s,2.9*s,.5*s),'cylinder')
+
 
 def dry_wall(b,x,z,length):
     rng=random.Random(int(x*13+z*5))
@@ -82,7 +69,7 @@ def provence(b):
             o.curve([(x,0,z),(x+.1,.5,z),(x-.06,1.1,z),(x+.25,1.4,z)],.045,'darkwood',8)
             for i in range(10):
                 a=i*2.4;p=(x+math.cos(a)*.44,1.25+math.sin(i)*.19,z+math.sin(a)*.29)
-                o.ball(p,(.22,.045,.16),'leafLight' if i%3 else 'leaf',rot=(.2,a,.2),segments=8,rings=4)
+                botany.leaf(o,p,.30,.21,a,.2,'leafLight' if i%3 else 'leaf')
             for side in [-1,1]:
                 for k in range(10):
                     a=k*2.4;rr=.065*(1-k/14)
@@ -119,14 +106,10 @@ def imported_rig(b):
         for x in [-8.78,.18]:b.collider('rig-anchor',(x,.4,z),(.4,.8,.4),'cylinder')
 
 def pine(b,x,z,s=1):
-    o=Organic('pine');o.curve([(x,0,z),(x+.35*s,2*s,z),(x+.15*s,4.7*s,z)],.17*s,'wood',12,taper=.15)
-    for i in range(8):
-        a=i*2.4;end=(x+math.cos(a)*1.8*s,(4.7+.3*math.sin(i))*s,z+math.sin(a)*1.8*s)
-        o.curve([(x+.2*s,2.8*s,z),(x+math.cos(a)*.7*s,4.2*s,z+math.sin(a)*.7*s),end],.075*s,'darkwood',10,taper=.3)
-        for j in range(9):
-            q=j*2.4;r=.6*math.sqrt(j/9)*s
-            o.ball((end[0]+math.cos(q)*r,end[1]+.2*math.sin(j)*s,end[2]+math.sin(q)*r),(.52*s,.28*s,.44*s),'leafDark' if j%3 else 'leaf',segments=12,rings=8)
-    transfer(o,b);b.collider('tree',(x,2*s,z),(.55*s,4*s,.55*s),'cylinder')
+    import botany
+    botany.tree(b,x,z,s*1.25,int(x*17+z*13),'pine')
+    b.collider('tree',(x,2*s,z),(.55*s,4*s,.55*s),'cylinder')
+
 
 def boat(b,x,z,sail=True):
     o=Organic('boat')

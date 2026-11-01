@@ -14,38 +14,19 @@ def desk(b,x,z):
     for dx in [-.85,.85]:
         for dz in [-.28,.28]: b.beam((x+dx,0,z+dz),(x+dx,.83,z+dz),.045,'iron')
     b.box((x,1.35,z-.2),(1,.65,.07),'iron');b.box((x,1.35,z-.155),(.89,.53,.02),'display')
+    b.box((x-.33,1.35,z-.14),(.16,.48,.008),'teal')
+    for row in range(7):
+        length=.20+((row*7)%5)*.055
+        b.box((x-.13+length/2,1.55-row*.055,z-.139),(length,.012,.006),'pixelGold' if row%3==0 else 'pixelBlue')
     b.box((x,.96,z+.15),(.75,.035,.25),'cream')
     b.beam((x,1,z-.2),(x,1.25,z-.2),.035,'iron')
     b.box((x,.5,z+1),(.65,.13,.65),'leather');b.box((x,.94,z+1.3),(.65,.8,.1),'teal')
     for dx in [-.22,.22]: b.beam((x+dx,0,z+.8),(x+dx,.5,z+1),.04,'iron')
 
 def pavilion(b):
-    # Open-front conservatory with visible studio interior and tiled canopy.
-    b.box((-2,.08,-3),(8,.22,6),'wood')
-    for row in range(12): b.box((-2,.21,-5.8+row*.47),(7.8,.08,.42),'oak' if row%3 else 'wood')
-    for x in [-5.7,-2,1.7]:
-        for z in [-5.7,-.3]:
-            b.beam((x,.25,z),(x,4.1,z),.13,'darkwood');b.box((x,4,z),(.5,.23,.5),'brass')
-    for x in [-5.7,1.7]:
-        b.box((x,1,-3),(.2,1.8,5.5),'stone')
-        for z in [-4.8,-3.2,-1.6]:
-            b.box((x,2.7,z),(.06,1.5,1.4),'glass')
-            b.beam((x,1.9,z+.75),(x,3.6,z+.75),.04,'brass')
-    b.box((-2,2,-5.8),(7.6,3.8,.17),'teal')
-    for x in [-4.4, -2, .4]: desk(b,x,-3.3)
-    for side in [-1,1]:
-        for row in range(8):
-            x=-2+side*(row+.5)*.52;y=5.6-abs(x+2)*.35
-            for col in range(12): b.box((x,y,-6.1+col*.55),(.59,.12,.63),'teal',rot=(0,0,-side*.34))
-        for z in [-6.1,-4,-2,.1]: b.beam((-2,5.65,z),(-2+side*4.2,4.18,z),.045,'brass')
-    for x in [-5.8,1.8]: lantern(b,x,-.1,3.1)
-    for x in [-5.7,1.7]: b.collider("pavilion-wall",(x,2,-3),(.28,4,5.5))
-    b.collider("pavilion-back",(-2,2,-5.8),(7.6,4,.25))
-    for x in [-5.7,-2,1.7]: b.collider("pavilion-post",(x,2,-.3),(.3,4,.3),"cylinder")
-    b.collider("display",(2.5,1.2,1),(1.3,2.4,.7))
-    # Books, display plinth and a small animal-encyclopedia exhibit.
-    b.box((2.5,.8,1),(1.3,1.6,.7),'wood');b.box((2.5,1.9,1),(1.1,.85,.09),'iron');b.box((2.5,1.9,1.06),(.94,.7,.02),'display')
-    for i in range(7): b.box((-4.5+i*.17,.5,-.8),(.13,.5+((i%3)*.08),.28),['red','teal','cream'][i%3])
+    from scenic_craft import pavilion as authored
+    return authored(b)
+
 
 def warehouse(b):
     building(b,-2,-4,7,4,3.6,'brick')
@@ -91,27 +72,9 @@ def masonry(b):
     b.box((3,.7,1.7),(.9,.5,1),'teal');b.ring((3,.35,1),.3,.08,'iron','x',16)
 
 def circus(b):
-    # Open front reveals a raised ring, curtains and illuminated proscenium.
-    n=40; r=4.3; center=(0,0,-3)
-    for i in range(n):
-        a=i*math.tau/n; c=(i+1)*math.tau/n
-        color='red' if (i//2)%2 else 'cream'
-        b.mesh([(0,6,-3),(r*math.cos(a),3.1,-3+r*math.sin(a)),(r*math.cos(c),3.1,-3+r*math.sin(c))],[(0,1,2)],color)
-        if math.sin(a)<.55:
-            b.mesh([(r*math.cos(a),0,-3+r*math.sin(a)),(r*math.cos(c),0,-3+r*math.sin(c)),(r*math.cos(c),3.1,-3+r*math.sin(c)),(r*math.cos(a),3.1,-3+r*math.sin(a))],[(0,1,2,3)],color)
-    b.collider("tent-pole",(0,3.4,-3),(.2,6.8,.2),"cylinder")
-    for i in range(n):
-        a=(i+.5)*math.tau/n
-        if math.sin(i*math.tau/n)<.55: b.collider("tent-wall",(math.cos(a)*4.3,1.5,-3+math.sin(a)*4.3),(.72,3,.72),"cylinder")
-    b.beam((0,0,-3),(0,6.8,-3),.07,'brass')
-    b.mesh([(0,6.8,-3),(1.2,6.5,-3),(0,6.2,-3)],[(0,1,2),(2,1,0)],'red')
-    b.ring((0,.2,-3),3.8,.14,'brass');b.ring((0,3.1,-3),4.3,.08,'brass')
-    for i in range(24):
-        a=i*math.tau/24;b.ball((math.cos(a)*4.3,3,-3+math.sin(a)*4.3),(.085,.085,.085),'lamp')
-    for row in range(3):
-        for col in range(8):
-            x=-3+col*.85;z=3+row*.8;b.collider("seat",(x,.65,z),(.65,1.3,.65));b.box((x,.5,z),(.65,.12,.6),'wood');b.box((x,.9,z+.27),(.65,.7,.09),'red')
-    for x in [-3.8,3.8]:lantern(b,x,1,2.8)
+    from scenic_craft import circus as authored
+    return authored(b)
+
 
 def backroads(b):
     building(b,-3,-4,5,4,3,'stone')

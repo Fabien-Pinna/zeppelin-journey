@@ -3,6 +3,7 @@ import { useMemo } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { JOINTS, jointName } from "./joints.js";
+import { scenicMaterial } from '../world/materials.js';
 /** Original Blender-authored character, with independent runtime joints. */
 export const Avatar = ({
   motion,
@@ -20,6 +21,7 @@ export const Avatar = ({
       joints = {};
     model.traverse((o) => {
       if (o.isMesh) {
+        o.material = scenicMaterial(o.material);
         o.castShadow = true;
         if (coat && o.name.includes("-coatDetail")) {
           o.material = o.material.clone();

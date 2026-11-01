@@ -3,6 +3,7 @@ import { useMemo } from "react";
 import { Html, useGLTF } from "@react-three/drei";
 import { islands } from "../journey/world.js";
 import { Activity, Guide, useScenicMotion } from "./Life.jsx";
+import { scenicMaterial } from './materials.js';
 useGLTF.setDecoderPath(assetUrl("draco/"));
 const Diorama = ({
   island,
@@ -18,7 +19,8 @@ const Diorama = ({
     const copy = scene.clone(true);
     copy.traverse((o) => {
       if (o.isMesh) {
-        o.castShadow = true;
+        o.material = scenicMaterial(o.material);
+        o.castShadow = !o.material.transparent;
         o.receiveShadow = true;
       }
     });

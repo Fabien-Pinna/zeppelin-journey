@@ -2,6 +2,8 @@
 import bpy, math, random, json
 from mathutils import Vector
 from craft import Batch, base, building, bunting, tree, flowerbed, lantern, crate, barrel, bicycle, export, OUT, ROOT, moving_part
+from animals import sheep
+from landscapes import provence, mediterranean, circus_backstage
 
 CHAPTERS=['atelier','warehouse','masonry','farm','clubmed','circus','backroads','learning','oclock']
 
@@ -88,44 +90,6 @@ def masonry(b):
         b.beam((3+side*.38,.65,1.7),(3+side*.38,.8,3),.045,'wood')
     b.box((3,.7,1.7),(.9,.5,1),'teal');b.ring((3,.35,1),.3,.08,'iron','x',16)
 
-def sheep(b,x,z,s=1):
-    b.ball((x,.7*s,z),(.6*s,.45*s,.38*s),'cream')
-    for i in range(16):
-        a=i*2.4;b.ball((x+math.cos(a)*.42*s,.78*s+math.sin(i)*.22*s,z+math.sin(a)*.27*s),(.18*s,.18*s,.18*s),'white')
-    b.ball((x+.52*s,.8*s,z),(.25*s,.3*s,.22*s),'darkwood')
-    for dx in [-.32,.32]:
-        for dz in [-.21,.21]: b.beam((x+dx*s,.1,z+dz*s),(x+dx*s,.65*s,z+dz*s),.06*s,'darkwood')
-
-def farm(b):
-    building(b,1,-4,5,4,3,'cream')
-    b.box((1,1.2,-1.8),(2.1,2.3,.18),'leafDark')
-    b.beam((.1,.2,-1.65),(1.9,2.3,-1.65),.06,'cream');b.beam((1.9,.2,-1.65),(.1,2.3,-1.65),.06,'cream')
-    # Windmill with an open timber lattice.
-    b.beam((-5,0,-5),(-5,6,-5),1,'stone',12)
-    b.ball((-5,6.15,-5),(1.35,.6,1.35),'tile')
-    def rotor(b):
-        for i in range(4):
-            a=i*math.pi/2+.5; dx,dz=math.cos(a),math.sin(a)
-            b.beam((-5,5.1,-3.9),(-5+dx*3,5.1+dz*3,-3.9),.09,'darkwood')
-            for k in range(4):
-                r=1.2+k*.43
-                b.beam((-5+dx*r-dz*.32,5.1+dz*r+dx*.32,-3.9),(-5+dx*r+dz*.32,5.1+dz*r-dx*.32,-3.9),.045,'oak')
-            for s in [-1,1]:b.beam((-5+dx*1-dz*s*.32,5.1+dz*1+dx*s*.32,-3.9),(-5+dx*2.9-dz*s*.32,5.1+dz*2.9+dx*s*.32,-3.9),.04,'oak')
-    moving_part(b,"windmill",(-5,5.1,-3.9),rotor)
-    b.collider("windmill",(-5,3,-5),(2,6,2),"cylinder")
-    for row in range(4):
-        z=1+row*.85;b.box((-3,.06,z),(4,.17,.6),'soil')
-        for col in range(8):
-            x=-4.7+col*.5
-            for k in range(3):b.shape('leaf',(x+math.sin(k*2)*.1,.3,z),(.22,.25,.1),'leafLight',rot=(0,k*2,.3))
-    moving_part(b,"sheep-a",(2,0,2),lambda part:sheep(part,2,2))
-    moving_part(b,"sheep-b",(3.8,0,3),lambda part:sheep(part,3.8,3,.8))
-    b.collider("fence",(5.2,.55,2.2),(.16,1.1,6.6))
-    for i in range(9):
-        z=-1+i*.8;b.beam((5.2,0,z),(5.2,1.1,z),.065,'wood')
-        if i<8:
-            for y in [.45,.9]:b.beam((5.2,y,z),(5.2,y,z+.8),.04,'oak')
-
 def circus(b):
     # Open front reveals a raised ring, curtains and illuminated proscenium.
     n=40; r=4.3; center=(0,0,-3)
@@ -148,41 +112,6 @@ def circus(b):
         for col in range(8):
             x=-3+col*.85;z=3+row*.8;b.collider("seat",(x,.65,z),(.65,1.3,.65));b.box((x,.5,z),(.65,.12,.6),'wood');b.box((x,.9,z+.27),(.65,.7,.09),'red')
     for x in [-3.8,3.8]:lantern(b,x,1,2.8)
-
-def clubmed(b):
-    b.box((0,.01,-3),(9,.1,7),'cream')
-    for x in [-3.7,3.7]:
-        for z in [-5,0]: b.beam((x,0,z),(x,7,z),.08,'iron')
-        b.beam((x,7,-5),(x,7,0),.07,'iron')
-        b.beam((x,7,-5),(x*1.7,0,-7),.016,'iron')
-    for z in [-5,-2.5,0]:b.beam((-3.7,7,z),(3.7,7,z),.08,'iron')
-    for x in [-3.7,3.7]:
-        for z in [-5.8,.8]:
-            b.beam((x,0,z),(x,2.1,z),.055,"iron")
-            b.beam((x,2.1,z),(x*.946,1.8,z+.2 if z<0 else z-.2),.035,"oak")
-            b.collider("net-post",(x,1,z),(.15,2,.15),"cylinder")
-    b.box((-4.1,4.7,-2.4),(1.2,.14,1.2),"wood")
-    for i in range(23):
-        x=-3.5+i*.32;b.beam((x,1.8,-5.6),(x,1.8,.6),.012,'cream',4)
-    for i in range(22):
-        z=-5.6+i*(6.2/21);b.beam((-3.5,1.8,z),(3.5,1.8,z),.012,'cream',4)
-    # Ropes, bar and performer share one runtime pendulum pivot.
-    for x in [-3.7,3.7]:
-        for z in [-5,0]: b.collider("trapeze-post",(x,3.5,z),(.2,7,.2),"cylinder")
-    b.collider("safety-net",(0,1.8,-2.5),(7,.12,6.2))
-    for i in range(12): b.box((-4.3,.2+i*.4,-.5-i*.15),(.75,.1,.4),"oak")
-    b.beam((-4.65,0,-.35),(-4.65,4.8,-2.2),.06,"iron")
-    b.beam((-3.95,0,-.35),(-3.95,4.8,-2.2),.06,"iron")
-    b.collider("ladder",(-4.3,2.4,-1.2),(.85,4.8,2.2))
-    for x in [-6,6]:
-        b.beam((x,0,-5),(x+.3,5,-5),.16,'wood')
-        for k in range(9):
-            a=k*math.tau/9
-            for j in range(5):
-                r=j*.4;b.shape('leaf',(x+math.cos(a)*r,5+.2*math.sin(r)-r*.2,-5+math.sin(a)*r),(.65,.05,.18),'leaf',rot=(0,-a,0))
-    for x in [-4,-1,2]:
-        b.collider("lounge-chair",(x,.65,4),(1.35,1.3,2.4))
-        b.box((x,.4,4),(1.3,.15,2.3),'cream');b.box((x,.75,3.25),(1.3,.9,.15),'teal',rot=(-.3,0,0))
 
 def backroads(b):
     building(b,-3,-4,5,4,3,'stone')
@@ -225,12 +154,16 @@ def oclock(b):
     for i in range(5):b.box((3.4+(i%2)*.5,2.2-(i//2)*.3,-1.88),(.6,.04,.02),'cream')
 
 def build_chapter(name):
-    index=CHAPTERS.index(name);b=Batch(name);base(b,13,index+12)
-    {'atelier':pavilion,'warehouse':warehouse,'masonry':masonry,'farm':farm,'clubmed':clubmed,'circus':circus,'backroads':backroads,'learning':learning,'oclock':oclock}[name](b)
-    for x in [-7,6]:
-        b.beam((x,0,2),(x,4,2),.075,"wood")
-        b.collider("bunting-post",(x,2,2),(.2,4,.2),"cylinder")
-    bunting(b,(-7,4,2),(6,4,2))
+    index=CHAPTERS.index(name);b=Batch(name)
+    landscape=json.loads((ROOT/'src/features/journey/landscapes.json').read_text())[name]
+    base(b,13,index+12,landscape)
+    {'atelier':pavilion,'warehouse':warehouse,'masonry':masonry,'farm':provence,'clubmed':mediterranean,'circus':circus,'backroads':backroads,'learning':learning,'oclock':oclock}[name](b)
+    if name=='circus':circus_backstage(b)
+    if name not in ['farm','clubmed','circus']:
+        for x in [-7,6]:
+            b.beam((x,0,2),(x,4,2),.075,"wood")
+            b.collider("bunting-post",(x,2,2),(.2,4,.2),"cylinder")
+        bunting(b,(-7,4,2),(6,4,2))
     objects=b.finish()+b.parts
     layout_path=ROOT/"src/features/journey/layouts.json"
     layouts=json.loads(layout_path.read_text()) if layout_path.exists() else {}

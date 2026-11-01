@@ -1,11 +1,12 @@
 """Original travelling character and an adapted, passenger-oriented library zeppelin."""
 import bpy, math, random
-from mathutils import Vector
-from craft import Batch, MATS, OUT, export, crate
+from mathutils import Vector, Matrix
+from craft import Batch, MATS, OUT, export, crate, moving_part
+from organic import Organic
 
 def airship():
-    b=Batch('airship'); objects=[]
-    omit=['Cannon','Gunport','Bowsprit','Figurehead','BraidProfile']
+    b=Organic('airship'); objects=[]
+    omit=['Cannon','Gunport','Bowsprit','Figurehead','BraidProfile','Props_']
     for o in list(bpy.context.scene.objects):
         if not o.name.startswith('ZEP_') or o.type!='MESH' or any(s in o.name for s in omit):continue
         mat=o.data.materials[0].name if o.data.materials else ''
@@ -39,78 +40,30 @@ def airship():
     for i in range(3):b.box((1.05+i*.23,1.92-i*.17,3.5),(.32,.12,1.1),'oak')
     crate(b,0,2.1,-1.1,.45)
     b.box((-.4,2.39,-1.1),(.42,.4,.3),'leather')
-    # Cream ribs and a navigation pennant finish the passenger silhouette.
-    objects=b.finish();export(objects,OUT/'zeppelin.glb')
+    # Longitudinal twin engines: visible from aft, clear of the envelope and fins.
+    for side,label in [(-1,'L'),(1,'R')]:
+        x=side*3.5;y=3.4;z=-3.5
+        for offset in [-.45,.45]:
+            b.beam((side*1.35,2.35,z+offset),(x,y,z+offset),.10,'iron',16)
+            b.beam((side*1.7,3.4,z+offset),(x,y,z+offset),.065,'brass',12)
+        b.ball((x,y,z),(.32,.32,.72),'teal')
+        for zz in [-.5,0,.5]:b.ring((x,y,z+zz),.3,.045,'brass','z',32)
+        b.beam((x,y,z-.65),(x,y,z-1),.10,'iron',20)
+        pivot=(x,y,z-1)
+        b.ring(pivot,1.14,.025,'brass','z',48)
+        def rotor(part,pivot=pivot):
+            hub=Organic('propeller-hub');hub.ball(pivot,(.17,.17,.20),'brass')
+            for mat,(vertices,faces,_) in hub.data.items():part.mesh([(a,c,-bb) for a,bb,c in vertices],faces,mat,True)
+            for i in range(3):
+                blade=Organic('propeller-blade')
+                blade.profile([(.08,0,0,.06,.045),(.32,.04,.015,.13,.04),(.68,.085,.025,.15,.028),(.96,.07,.04,.10,.02),(1.06,.03,.04,.01,.005)],'oak',20,3)
+                rotation=Matrix.Rotation(i*math.tau/3,3,'Z')
+                for mat,(vertices,faces,_) in blade.data.items():
+                    part.mesh([Vector(pivot)+rotation@Vector((a,c,-bb)) for a,bb,c in vertices],faces,mat,True)
+        moving_part(b,'propeller-'+label,pivot,rotor)
+    objects=b.finish()+b.parts;export(objects,OUT/'zeppelin.glb')
     for o in objects:o.hide_set(True);o.hide_render=True
     return len(objects)
 
-def character(asset="traveller", backpack=True):
-    # A new adult storybook adventurer: tailored teal jacket, rust scarf,
-    # sculpted facial features, wavy hair, leather satchel and hiking boots.
-    all_objects=[]
-    root=bpy.data.objects.new('Traveller',None);bpy.context.scene.collection.objects.link(root);all_objects.append(root)
-    def part(name,pivot,build):
-        joint=bpy.data.objects.new(name,None);bpy.context.scene.collection.objects.link(joint);joint.parent=root
-        joint.location=(pivot[0],-pivot[2],pivot[1]);all_objects.append(joint)
-        b=Batch(asset+'-'+name);build(b)
-        objs=b.finish(parent=joint)
-        for o in objs:
-            for v in o.data.vertices:v.co-=Vector(joint.location)
-        all_objects.extend(objs)
-    def body(b):
-        b.ball((0,1.22,0),(.32,.43,.22),'teal')
-        b.box((0,.98,0),(.57,.17,.37),'leather')
-        b.box((0,1.01,.205),(.13,.11,.04),'brass')
-        for x in [-.2,.2]:
-            b.box((x,1.22,.18),(.15,.17,.055),'teal')
-            b.box((x,1.3,.216),(.16,.035,.03),'brass')
-        for y in [1.12,1.3,1.45]:b.ball((0,y,.22),(.026,.026,.016),'brass')
-        b.ball((0,1.62,0),(.12,.15,.12),'skin')
-        b.ring((0,1.57,0),.145,.06,'scarf',segments=20)
-        b.box((.12,1.37,.235),(.14,.4,.055),'scarf',rot=(0,0,.25))
-        if backpack:
-            b.box((0,1.3,-.28),(.49,.56,.24),'leather')
-            b.box((0,1.56,-.29),(.51,.13,.26),'wood')
-            b.box((0,1.28,-.422),(.17,.12,.025),'brass')
-            for x in [-.22,.22]:b.beam((x,1.55,.1),(x,1.02,.19),.028,'leather')
-            b.beam((-.22,1.59,-.27),(.22,1.59,-.27),.08,'cream')
-    part('Body',(0,1.1,0),body)
-    def head(b):
-        b.ball((0,1.92,.015),(.265,.31,.235),'skin')
-        b.ball((0,1.76,.07),(.19,.13,.16),'skin')
-        for s in [-1,1]:
-            b.ball((s*.257,1.89,0),(.055,.09,.05),'skin')
-            b.ball((s*.094,1.96,.217),(.062,.042,.025),'white')
-            b.ball((s*.094,1.96,.241),(.025,.03,.012),'eye')
-            b.ball((s*.087,1.972,.252),(.007,.008,.004),'white')
-            b.beam((s*.043,2.02,.225),(s*.143,2.035,.206),.016,'hair')
-        b.ball((0,1.9,.245),(.052,.066,.055),'skin')
-        # Small curved smile, lower-lip shadow and facial hair along the jaw.
-        for i in range(8):
-            x=-.07+i*.02;y=1.808- .014*math.sin(i/7*math.pi)
-            b.ball((x,y,.23-abs(x)*.1),(.014,.006,.007),'hair')
-        b.ball((0,2.117,-.02),(.27,.14,.235),'hair')
-        rng=random.Random(71)
-        for i in range(74):
-            a=i*2.4;r=rng.uniform(.1,.25)
-            b.ball((math.cos(a)*r,2.15+rng.uniform(-.04,.09),-.02+math.sin(a)*r),(.065,.06,.07),'hair')
-        for s in [-1,1]: b.ball((s*.23,2.02,-.02),(.055,.13,.16),'hair')
-    part('Head',(0,1.63,0),head)
-    for side,label in [(-1,'Left'),(1,'Right')]:
-        def arm(b,s=side):
-            b.ball((s*.35,1.37,0),(.115,.25,.12),'teal',rot=(0,0,s*.14))
-            b.ball((s*.4,1.07,.015),(.09,.19,.1),'teal')
-            b.ring((s*.4,.93,.015),.078,.025,'cream',segments=16)
-            b.ball((s*.4,.83,.02),(.075,.105,.075),'skin')
-            b.ball((s*.34,.85,.06),(.036,.055,.035),'skin')
-        part(label+'Arm',(side*.31,1.52,0),arm)
-        def leg(b,s=side):
-            b.ball((s*.155,.67,0),(.125,.34,.14),'trousers')
-            b.ball((s*.155,.35,0),(.105,.22,.115),'trousers')
-            b.ball((s*.155,.15,.045),(.13,.15,.21),'leather')
-            b.box((s*.155,.055,.07),(.26,.09,.43),'darkwood')
-            for y,z in [(.2,.17),(.23,.12),(.26,.06)]:b.beam((s*.155-.06,y,z),(s*.155+.06,y,z),.008,'cream',4)
-        part(label+'Leg',(side*.155,.94,0),leg)
-    export(all_objects,OUT/(asset+'.glb'))
-    for o in all_objects:o.hide_set(True);o.hide_render=True
-    return len(all_objects)
+
+from characters import character

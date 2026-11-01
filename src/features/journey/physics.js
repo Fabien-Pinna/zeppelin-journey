@@ -1,5 +1,6 @@
 import { activityPosition } from "./activities.js";
 import layouts from "./layouts.json" with { type: "json" };
+import { islandBoundary } from './landscape.js';
 
 export const BODY_RADIUS = 0.32;
 export const BODY_HEIGHT = 2.25;
@@ -34,17 +35,21 @@ export const obstaclesFor = (id, time = 0) => [
         {
           name: "sheep-a",
           type: "box",
-          position: [2 + Math.sin(time * 0.35) * 0.35, 0.6, 2],
-          size: [1.4, 1.2, 0.8],
+          position: [2.12 + Math.sin(time * 0.35) * 0.35, 0.65, 2],
+          size: [1.75, 1.3, 0.86],
         },
         {
           name: "sheep-b",
           type: "box",
-          position: [3.8, 0.5, 3 + Math.sin(time * 0.3) * 0.25],
-          size: [1.1, 1, 0.7],
+          position: [3.9, 0.52, 3 + Math.sin(time * 0.3) * 0.25],
+          size: [1.4, 1.04, 0.72],
         },
       ]
     : []),
+  ...(id === 'circus' ? [
+    { name: 'stage-manager', type: 'cylinder', position: [-6,1,4.5], size: [.65,2,.65] },
+    { name: 'clown', type: 'cylinder', position: [5,1,.8], size: [.65,2,.65] },
+  ] : []),
 ];
 
 export function penetration(x, z, obstacle, radius = BODY_RADIUS) {
@@ -108,7 +113,7 @@ export function moveWalker(x, z, dx, dz, island, feet = 0.02, time = 0) {
         }
       }
       const distance = Math.hypot(lx, lz),
-        limit = island.radius - 0.9;
+        limit = islandBoundary(island.id, Math.atan2(lz, lx)) - 0.9;
       if (distance > limit) {
         lx *= limit / distance;
         lz *= limit / distance;
@@ -161,10 +166,11 @@ export function cameraFraction(from, to, island) {
 }
 
 export const TRAPEZE = {
-  length: 2.3,
-  pivot: [0, 7, -2.5],
+  length: 2.96,
+  pivot: [-4.3, 6.856, 0.088],
   gripHeight: 2.33,
-  scale: 0.9,
+  scale: 0.7,
+  net: { height: 2.032, back: -9.32, front: 5.72 },
 };
 export const createPendulum = () => ({
   angle: 0.58,
@@ -189,9 +195,9 @@ export function stepPendulum(state, delta) {
 }
 export function trapezePoint(angle, local) {
   return [
-    local[0],
-    7 + local[1] * Math.cos(angle) - local[2] * Math.sin(angle),
-    -2.5 + local[1] * Math.sin(angle) + local[2] * Math.cos(angle),
+    TRAPEZE.pivot[0] + local[0],
+    TRAPEZE.pivot[1] + local[1] * Math.cos(angle) - local[2] * Math.sin(angle),
+    TRAPEZE.pivot[2] + local[1] * Math.sin(angle) + local[2] * Math.cos(angle),
   ];
 }
 export function jugglingBall(time, index) {

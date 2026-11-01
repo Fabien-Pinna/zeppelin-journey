@@ -3,6 +3,7 @@ import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { Avatar } from "./Avatar.jsx";
 import { Zeppelin } from "../world/Zeppelin.jsx";
+import { flightCameraOffset } from "./flight.js";
 import {
   moveWalker,
   deadZone,
@@ -40,6 +41,7 @@ export const Journey = ({
   const vessel = useRef(new THREE.Vector3(...berthPosition(islands[0])));
   const motion = useRef({ speed: 0 });
   const vertical = useRef({ velocity: 0, jumpHeld: false });
+  const flightOrbit = useRef({ previous: 0, idle: 0 });
   const heading = useRef(0),
     timer = useRef(0),
     gamepadAction = useRef(false);
@@ -54,6 +56,12 @@ export const Journey = ({
     [],
   );
   const island = islands.find((item) => item.id === islandId);
+  useEffect(() => {
+    if (mode === "takeoff") {
+      input.current.orbit = 0;
+      flightOrbit.current = { previous: 0, idle: 0 };
+    }
+  }, [mode, input]);
   useEffect(() => {
     actionRef.current = () => {
       if (paused) return;
@@ -232,15 +240,6 @@ export const Journey = ({
         2,
         camera.aspect < 1 ? 0 : -13,
       );
-    } else if (mode === "landing") {
-      const dock = dockPosition(island),
-        angle = input.current.orbit;
-      vectors.camera.set(
-        dock[0] - 1 + Math.sin(angle) * 14,
-        dock[1] + 8.2,
-        dock[2] + 1 + Math.cos(angle) * 14,
-      );
-      vectors.look.set(dock[0] - 1, dock[1] + 1.5, dock[2] + 1);
     } else if (mode === "walking") {
       const angle = input.current.orbit;
       vectors.camera.set(
@@ -250,13 +249,18 @@ export const Journey = ({
       );
       vectors.look.copy(walker.current).add(vectors.target.set(0, 1.3, 0));
     } else {
-      const angle = ship.current.rotation.y + Math.PI + input.current.orbit;
-      vectors.camera.set(
-        vessel.current.x + Math.sin(angle) * 24,
-        vessel.current.y + 12,
-        vessel.current.z + Math.cos(angle) * 24,
-      );
-      vectors.look.copy(vessel.current).add(vectors.target.set(0, 2.8, 0));
+      const orbit = flightOrbit.current;
+      if (!paused) {
+        orbit.idle = Math.abs(input.current.orbit - orbit.previous) > 0.0001
+          ? 0 : orbit.idle + dt;
+        input.current.orbit = THREE.MathUtils.clamp(input.current.orbit, -1.05, 1.05);
+        if (orbit.idle > 1.2)
+          input.current.orbit = THREE.MathUtils.damp(input.current.orbit, 0, 2.4, dt);
+        orbit.previous = input.current.orbit;
+      }
+      vectors.camera.set(...flightCameraOffset(ship.current.rotation.y, input.current.orbit, camera.aspect < 1));
+      vectors.camera.add(vessel.current);
+      vectors.look.copy(vessel.current).add(vectors.target.set(0, 3.8, 0));
     }
     const zoom = clampZoom(input.current.zoom);
     vectors.camera.sub(vectors.look).multiplyScalar(zoom).add(vectors.look);

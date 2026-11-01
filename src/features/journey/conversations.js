@@ -60,18 +60,18 @@ export const conversations = {
     ],
   },
   farm: {
-    name: "Le jardinier",
-    role: "À la ferme",
+    name: "Le vendangeur",
+    role: "Au pied du Ventoux",
     greeting:
-      "Bienvenue au rythme du vivant. Le travail agricole fait lui aussi partie du parcours de Fabien.",
+      "Bienvenue dans le Vaucluse, au pied du mont Ventoux. Fabien a travaillé ici dans les vignes, les cerisiers et les oliviers.",
     topics: [
       [
         "Quelle place dans son parcours ?",
-        "L’agriculture est l’une de ses expériences professionnelles, au même titre que l’entrepôt et la maçonnerie. Elle a donc son île à part entière.",
+        "Le travail agricole de Fabien se déroulait dans les vignes, les vergers de cerisiers et les oliveraies du Vaucluse. Le paysage raconte ces trois cultures.",
       ],
       [
         "Un détail à observer ?",
-        "Les ailes du moulin tournent, les moutons remuent près des cultures et le jardinier prend soin du potager. Ce petit paysage évoque le travail agricole.",
+        "Les grappes pendent sous les fils de palissage. Plus loin, les cerises rougissent et les oliviers portent leur feuillage argenté. La crête calcaire au fond évoque le mont Ventoux.",
       ],
       [
         "On prend de la hauteur ?",
@@ -83,15 +83,15 @@ export const conversations = {
     name: "Le trapéziste",
     role: "Au pied du portique",
     greeting:
-      "Lève les yeux : quelqu’un est déjà en piste ! Le trapèze au Club Med marque une étape du parcours de Fabien dans les airs.",
+      "Bienvenue entre Gregolimano, sur l’île d’Eubée, et Beldi, près d’Antalya. Cette escale réunit les souvenirs des deux villages Club Med où Fabien a travaillé.",
     topics: [
       [
-        "C’est le début du cirque ?",
-        "Cette étape au Club Med précède le long chapitre consacré au cirque. Le trapèze est le cœur de cette escale.",
+        "Quels souvenirs de ces villages ?",
+        "Des plages paradisiaques, le ski nautique et les cours de voile, les piscines, le trapèze volant et les spectacles au théâtre de plein air. La plage bordée de pins évoque particulièrement Gregolimano.",
       ],
       [
         "Comment observer le mouvement ?",
-        "Regarde les mains sur la barre, puis le passage au-dessus du filet. Tu peux rapprocher la caméra avec le zoom et tourner autour du portique.",
+        "Repère les trois portiques : celui de la plateforme de départ, celui de la barre de voltige et celui du trapèze porteur. Les bavettes prolongent le filet aux extrémités. Tu peux zoomer et tourner autour de l’installation.",
       ],
       [
         "Combien de temps dans le cirque ?",
@@ -103,15 +103,15 @@ export const conversations = {
     name: "Le régisseur",
     role: "Sous le chapiteau",
     greeting:
-      "Bienvenue dans les années cirque. Dix années du parcours de Fabien sont consacrées à cet univers.",
+      "Bienvenue chez Bouglione. Fabien a travaillé dix ans dans cet univers, en tournée sous chapiteau et au Cirque d’Hiver à Paris, côté piste et coulisses.",
     topics: [
       [
-        "Dix ans ?",
-        "Oui. Après le trapèze au Club Med, les arts du cirque occupent dix années de son parcours. Le chapiteau représente ce chapitre.",
+        "Quel était son rôle ?",
+        "Assistant régisseur, garçon de piste et monteur de chapiteau. Il s’occupait aussi de l’affichage publicitaire et du camion d’annonce du spectacle. Ce chapitre raconte le travail qui rend la représentation possible.",
       ],
       [
         "Le spectacle a commencé ?",
-        "Le jongleur répète sur la piste. Ses balles suivent leur trajectoire entre deux lancers, tandis que les gradins attendent les visiteurs.",
+        "Trapézistes, clowns, jongleurs, lions et éléphants appartiennent à ses souvenirs de Bouglione. Les artistes que tu vois évoquent les spectacles ; ils ne représentent pas les métiers de Fabien. Les caravanes, la régie et le camion racontent les coulisses.",
       ],
       [
         "Et après la piste ?",

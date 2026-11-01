@@ -10,6 +10,7 @@ export const Avatar = ({
   coat,
   pose = "walk",
   simulation,
+  costume,
 }) => {
   const { scene } = useGLTF(
     assetUrl(`models/world-v2/${pose === "hang" || pose === "juggle" ? "acrobat" : "traveller"}.glb`),
@@ -20,7 +21,7 @@ export const Avatar = ({
     model.traverse((o) => {
       if (o.isMesh) {
         o.castShadow = true;
-        if (coat && o.name.includes("-teal")) {
+        if (coat && o.name.includes("-coatDetail")) {
           o.material = o.material.clone();
           o.material.map = null;
           o.material.color.set(coat);
@@ -75,5 +76,9 @@ export const Avatar = ({
       joints.RightArm.rotation.x = -0.25 + Math.sin(time * 0.8) * 0.18;
     }
   });
-  return <primitive object={model} dispose={null} />;
+  return <group><primitive object={model} dispose={null} />{costume === 'clown' && <>
+    <mesh position={[0,1.98,.235]} castShadow><sphereGeometry args={[.065,20,12]}/><meshStandardMaterial color="#c23e35"/></mesh>
+    <mesh position={[0,2.34,0]} castShadow><coneGeometry args={[.2,.4,24]}/><meshStandardMaterial color="#e1b955"/></mesh>
+    {[1.15,1.36,1.56].map(y=><mesh key={y} position={[0,y,.19]}><sphereGeometry args={[.06,16,10]}/><meshStandardMaterial color="#ead9b6"/></mesh>)}
+  </>}</group>;
 };

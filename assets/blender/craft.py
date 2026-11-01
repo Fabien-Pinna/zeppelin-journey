@@ -56,6 +56,9 @@ def palette():
       'iron':('#2f3939',1,.45,None),'brass':('#cf9a43',1,.32,None),'glass':('#93c5bc',0,.18,None),
       'skin':('#d09a70',0,.7,None),'hair':('#34261f',0,.75,None),'trousers':('#697351',0,.85,'cloth'),
       'scarf':('#b25437',0,.83,'cloth'),'leather':('#835432',0,.65,None),'screen':('#426f83',0,.25,None)}
+    specs.update({'sand':('#e9d4a7',0,.98,'stone'),'meadow':('#86956a',0,.97,'grass'),'yard':('#8a8e86',0,.98,'stone'),
+      'oliveLeaf':('#8c9b76',0,.92,None),'oliveDark':('#526348',0,.94,None),'cherry':('#a52f3c',0,.4,None),
+      'grape':('#695477',0,.5,None),'waterDeep':('#277e96',.08,.28,None),'waterShallow':('#69c7bd',.05,.24,None),'foam':('#e7f3dc',0,.6,None)})
     for n,(c,me,r,t) in specs.items(): material(n,c,me,r,texture=t)
     material('lamp','#ffd383',rough=.35,emission=4)
     material('display','#89d6df',rough=.3,emission=.7)
@@ -126,7 +129,10 @@ def export(objects,path):
     bpy.ops.object.select_all(action='DESELECT')
     for o in objects: o.select_set(True)
     bpy.context.view_layer.objects.active=next((o for o in objects if o.type=='MESH'),objects[0])
-    bpy.ops.export_scene.gltf(filepath=str(path),export_format='GLB',use_selection=True,use_active_scene=True,export_apply=True,export_yup=True,export_animations=False,export_cameras=False,export_lights=False,export_draco_mesh_compression_enable=True,export_draco_mesh_compression_level=6)
+    # Keep the last good asset intact while Blender encodes/writes the replacement.
+    path=Path(path);pending=path.with_name(path.stem+'.pending.glb')
+    bpy.ops.export_scene.gltf(filepath=str(pending),export_format='GLB',use_selection=True,use_active_scene=True,export_apply=True,export_yup=True,export_animations=False,export_cameras=False,export_lights=False,export_draco_mesh_compression_enable=True,export_draco_mesh_compression_level=6)
+    pending.replace(path)
     print('EXPORTED',str(path),os.path.getsize(path))
 
 def moving_part(batch, name, pivot, draw):
@@ -137,7 +143,12 @@ def moving_part(batch, name, pivot, draw):
     objects=part.finish(parent=root)
     for obj in objects:
         for vertex in obj.data.vertices: vertex.co-=p
-    batch.parts.extend([root,*objects])
+    # Nested articulated parts retain their own local pivots.
+    for obj in part.parts:
+        if obj.parent is None:
+            obj.parent=root
+            obj.location-=p
+    batch.parts.extend([root,*objects,*part.parts])
     return root
 
 def lantern(b,x,z,h=2.1):
@@ -197,19 +208,24 @@ def dock(b):
             b.beam((7+side*2.2,y,z),(7+side*2.2,.9-.15*math.sin((k+1)/14*math.pi),z+.5),.025,'oak')
     lantern(b,4.8,9.3); lantern(b,9.2,9.3); crate(b,8.5,.2,3.3); barrel(b,5.5,3.2,.8)
 
-def base(b,r=13,seed=1):
-    rng=random.Random(seed); n=48; verts=[]
-    radii=[r*(.96+rng.random()*.07) for _ in range(n)]
-    for height,factor in [(0,1),(-.55,.99),(-2.2,.91),(-5,.62),(-9,.18)]:
+def base(b,r=13,seed=1,landscape=None):
+    shape=landscape or {'rx':r,'rz':r,'power':2,'scallop':.03,'phase':0,'depth':9,'style':'garden','path':'stone','ground':'grass'}
+    def boundary(a):return ((abs(math.cos(a)/shape['rx'])**shape['power']+abs(math.sin(a)/shape['rz'])**shape['power'])**(-1/shape['power']))*(1+shape['scallop']*math.cos(3*a+shape['phase']))
+    rng=random.Random(seed); n=64; verts=[]
+    radii=[boundary(i*math.tau/n) for i in range(n)]
+    depth=shape['depth']
+    for height,factor in [(0,1),(-.55,.99),(-depth*.25,.91),(-depth*.58,.62),(-depth,.18)]:
         for i in range(n):
             a=i*math.tau/n; rr=radii[i]*factor*(1 if height==0 else rng.uniform(.92,1.08)); verts.append((math.cos(a)*rr,height,math.sin(a)*rr))
-    b.mesh(verts,[tuple(range(n-1,-1,-1))],'grass')
+    b.mesh(verts,[tuple(range(n-1,-1,-1))],shape['ground'])
     for j in range(4): b.mesh(verts,[(j*n+i,j*n+(i+1)%n,(j+1)*n+(i+1)%n,(j+1)*n+i) for i in range(n)],'stone' if j==0 else 'rockLight' if j==1 else 'rock')
     for i in range(38):
-        a=i*2.4; rr=r*rng.uniform(.56,.8); b.shape('rock',(math.cos(a)*rr,-2.8-rng.random()*2,math.sin(a)*rr),(rng.uniform(1.6,3),rng.uniform(1.5,2.9),rng.uniform(1.6,3)),'rockLight' if i%3==0 else 'rock')
+        a=i*2.4; rr=boundary(a)*rng.uniform(.56,.8); b.shape('rock',(math.cos(a)*rr,-depth*.34-rng.random()*depth*.22,math.sin(a)*rr),(rng.uniform(1.6,3),rng.uniform(1.5,2.9),rng.uniform(1.6,3)),'rockLight' if i%3==0 else 'rock')
     # Broken grassy shelves, mossy cliff pockets and low planting soften the rim.
     for i in range(90):
-        a=rng.random()*math.tau; rr=rng.uniform(r-2.6,r-.4); x=math.cos(a)*rr;z=math.sin(a)*rr
+        a=rng.random()*math.tau; rr=boundary(a)-rng.uniform(.4,2.6); x=math.cos(a)*rr;z=math.sin(a)*rr
+        if shape['style']=='coast' and x< -5:continue
+        if shape['style']=='industrial' and i%3:continue
         if x>4 and z>2: continue
         b.ball((x,.14,z),(rng.uniform(.35,.8),.28,rng.uniform(.3,.65)),'leaf' if i%3 else 'leafDark')
         for k in range(4):
@@ -218,23 +234,35 @@ def base(b,r=13,seed=1):
             b.shape('rock',(x,.08,z),(.6,.26,.45),'stone')
             b.ball((x,-1.1,z),(.7,.3,.6),'leafDark')
     # Irregular limestone paving and the path to the timber pier.
-    for j in range(7):
+    for j in range(7 if shape['path']=='stone' else 0):
         for i in range(7):
             x=(i-3)*.8+math.sin(j)*.15; z=(j-1)*.8
             b.box((x,.035,z),(.74,.09,.7),'stoneLight' if (i+j)%3 else 'stone',rot=(0,rng.uniform(-.08,.08),0))
-    for i in range(7): b.box((2.8+i*.6,.04,4.6),(.58,.09,1.1),'stone')
+    if shape['path']=='carpet':b.box((1,.025,3),(2,.06,6),'red')
+    elif shape['path']=='yard':
+        for i in range(6):b.box((i-3,.025,4),(.85,.06,3.8),'yard')
+    elif shape['path']=='earth':
+        for i in range(9):b.ball((4-i*.65,.015,5-i*.45),(1,.025,.6),'soil')
+    for i in range(7): b.box((2.8+i*.6,.04,4.6),(.58,.09,1.1),'oak' if shape['path']=='sand' else 'stone')
     dock(b)
     for i in range(12):
-        a=i*math.tau/12; x=math.cos(a)*(r-1.1);z=math.sin(a)*(r-1.1)
+        a=i*math.tau/12; x=math.cos(a)*(boundary(a)-1.1);z=math.sin(a)*(boundary(a)-1.1)
+        if shape['style']=='coast' and x< -5:continue
+        if shape['style']=='industrial':continue
         if x>4 and z>2: continue
         flowerbed(b,x,z,1.2,seed*100+i)
         for k in range(9):
             yy=-k*.3; px=x+math.sin(k)*.15;pz=z+math.cos(k)*.15
             b.shape('leaf',(px,yy,pz),(.3,.16,.23),'leaf' if k%2 else 'leafDark')
-    for i,(x,z,s) in enumerate([(-8,-4,1.2),(6,-7,1.3),(-9,4,.8),(8,0,.9)]): tree(b,x,z,s,seed*10+i)
-    for x,z in [(-10,7),(10,1),(-7,-1),(9,-5.5)]: lantern(b,x,z)
+    if shape['style'] not in ['orchard','coast','circus','industrial']:
+        for i,(x,z,s) in enumerate([(-8,-4,1.2),(6,-7,1.3),(-9,4,.8),(8,0,.9)]): tree(b,x,z,s,seed*10+i)
+    for x,z in [(-10,7),(10,1),(-7,-1),(9,-5.5)]:
+        if shape['style'] in ['coast','circus']:continue
+        if shape['style']=='coast' and x<-5:continue
+        if shape['style']=='orchard' and x<0:continue
+        lantern(b,x,z)
     # Wild lower gardens fill the sides without obstructing the central walk.
-    for side in [-1,1]:
+    for side in ([-1,1] if shape['style'] in ['garden','trail','campus'] else []):
         for j in range(5):
             x=side*(7+j%2*1.5);z=-8+j*2.4
             flowerbed(b,x,z,.9,seed*500+j)

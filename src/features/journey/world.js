@@ -1,4 +1,5 @@
 /** Physical chapters and narrative share one source, including the text edition. */
+import { landscapes } from './landscape.js';
 export const islands = [
   [
     "atelier",
@@ -41,15 +42,15 @@ export const islands = [
     "Le trapèze",
     "Le premier envol",
     "Trapèze · Club Med",
-    [33, 4, -23],
+    [46, 4, -22],
     "#86babc",
     "⌁",
   ],
   [
     "circus",
     "Les années cirque",
-    "Dix ans dans les airs",
-    "Arts du cirque · 10 années",
+    "Dix ans de piste et de coulisses",
+    "Bouglione · 10 années",
     [-32, 3, -16],
     "#d78f79",
     "◒",
@@ -89,7 +90,8 @@ export const islands = [
   position,
   color,
   icon,
-  radius: 13,
+  radius: Math.max(landscapes[id].rx, landscapes[id].rz) * 1.15,
+  landscape: landscapes[id],
   number: String(index + 1).padStart(2, "0"),
 }));
 const stories = {
@@ -106,16 +108,16 @@ const stories = {
     "Une arche en cours d’assemblage et un atelier de pierre donnent forme à ce chapitre du parcours.",
   ],
   farm: [
-    "Le travail agricole fait également partie du parcours. Une expérience à retrouver dans cette île de cultures, de végétation et de chemins de terre.",
-    "La ferme et son moulin sont une évocation visuelle de ce chapitre.",
+    "J’ai travaillé dans les vignes, les cerisiers et les oliviers du Vaucluse, au pied du mont Ventoux.",
+    "Les rangs de vigne, le verger et l’oliveraie donnent à cette escale son paysage provençal, entre terres cultivées et pierres claires.",
   ],
   clubmed: [
-    "Le trapèze au Club Med marque une étape du parcours dans les airs.",
-    "Cette escale s’organise autour d’un portique de trapèze et de son filet. Elle précède le long chapitre consacré au cirque.",
+    "J’ai travaillé au Club Med de Gregolimano, sur l’île d’Eubée en Grèce, et à Beldi, près d’Antalya en Turquie.",
+    "Plages, ski nautique, cours de voile, trapèze volant, piscines et spectacles au théâtre de plein air : cette île rassemble les souvenirs de ces deux villages méditerranéens.",
   ],
   circus: [
-    "Dix années de cirque : un chapitre à part entière, après le trapèze au Club Med.",
-    "Un chapiteau ouvert, une piste et des gradins forment le cœur de cette île dédiée aux arts du cirque.",
+    "Dix années avec Bouglione, en tournée sous chapiteau et pour les spectacles du Cirque d’Hiver à Paris.",
+    "Assistant régisseur, garçon de piste, monteur de chapiteau : je travaillais aussi à l’affichage publicitaire et au camion d’annonce du spectacle. Les artistes, les animaux et les caravanes évoquent cet univers, côté piste et côté coulisses.",
   ],
   backroads: [
     "Backroads fait partie de mon parcours professionnel et possède désormais son escale dédiée.",

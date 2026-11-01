@@ -18,8 +18,8 @@ export const activities = {
     color: "#b48d68",
   },
   farm: {
-    position: [-5.8, 0.02, 2.3],
-    rotation: Math.PI / 2,
+    position: [-5.8, 0.02, 0.45],
+    rotation: 0,
     pose: "garden",
     color: "#738b52",
   },

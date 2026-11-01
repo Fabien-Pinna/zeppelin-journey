@@ -18,6 +18,7 @@ import {
   clampZoom,
 } from "../src/features/journey/physics.js";
 import { conversations } from "../src/features/journey/conversations.js";
+import { islandBoundary } from '../src/features/journey/landscape.js';
 
 test("every harbour is clear and selected by assisted docking", () => {
   for (const island of islands) {
@@ -40,7 +41,7 @@ test("large motion cannot tunnel through a thin pole or leave an island", () => 
       );
       assert.ok(
         Math.hypot(x - island.position[0], z - island.position[2]) <=
-          island.radius - 0.89,
+          islandBoundary(island.id, Math.atan2(z-island.position[2],x-island.position[0])) - 0.89,
       );
     }
 });
@@ -71,10 +72,10 @@ test("posts no longer intersect chairs, desks or the van", () => {
   for (const island of islands) {
     const obstacles = obstaclesFor(island.id);
     for (const post of obstacles.filter((o) =>
-      ["lantern", "bunting-post"].includes(o.name),
+      ["lantern", "bunting-post", "sign-post", "tree", "trapeze-post", "parasol"].includes(o.name),
     )) {
       for (const prop of obstacles.filter((o) =>
-        ["desk", "chair", "lounge-chair", "van", "display"].includes(o.name),
+        ["desk", "chair", "lounge-chair", "lounger", "van", "display", "pool", "seat", "theatre-bench", "outdoor-stage"].includes(o.name),
       )) {
         assert.equal(
           penetration(
@@ -97,21 +98,21 @@ test("pendulum retains grip and clears the net throughout a five-minute run", ()
   for (let frame = 0; frame < 60 * 300; frame++) {
     const a = stepPendulum(p, 1 / 60);
     maxAngle = Math.max(maxAngle, Math.abs(a));
-    const bar = trapezePoint(a, [0.36, -TRAPEZE.length, 0]);
+    const bar = trapezePoint(a, [0.4 * TRAPEZE.scale, -TRAPEZE.length, 0]);
     const hand = trapezePoint(a, [
-      0.4 * 0.9,
-      -TRAPEZE.length - 2.33 * 0.9 + (1.64 + 0.69) * 0.9,
-      0.02 * 0.9 - 0.02 * 0.9,
+      0.4 * TRAPEZE.scale,
+      -TRAPEZE.length - 2.33 * TRAPEZE.scale + (1.64 + 0.69) * TRAPEZE.scale,
+      0.02 * TRAPEZE.scale - 0.02 * TRAPEZE.scale,
     ]);
     assert.ok(Math.hypot(...bar.map((n, i) => n - hand[i])) < 0.00001);
-    const foot = trapezePoint(a, [0, -TRAPEZE.length - 2.33 * 0.9, 0.018]);
+    const foot = trapezePoint(a, [0, -TRAPEZE.length - 2.33 * TRAPEZE.scale, 0.02 * TRAPEZE.scale]);
     minY = Math.min(minY, foot[1]);
     assert.ok(
-      Math.abs(foot[2] + 2.5) + 0.35 < 3.1,
+      foot[2] - .35 > TRAPEZE.net.back && foot[2] + .35 < TRAPEZE.net.front,
       "full body stays over the safety net",
     );
   }
-  assert.ok(minY > 2.5, `feet ${minY}, net 1.8`);
+  assert.ok(minY > TRAPEZE.net.height + .18, `feet ${minY}, net ${TRAPEZE.net.height}`);
   assert.ok(maxAngle > 0.5 && maxAngle < 1.1, `stable amplitude ${maxAngle}`);
 });
 test("pendulum timing agrees at 30 and 120 FPS", () => {

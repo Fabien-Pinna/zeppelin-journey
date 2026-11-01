@@ -1,3 +1,4 @@
+import { assetUrl } from "./assetUrl.js";
 import {
   lazy,
   Suspense,
@@ -119,7 +120,7 @@ export const App = () => {
     <main
       className={`app ${intro ? "is-intro" : "is-playing"} ${night ? "is-night" : ""}`}
     >
-      <a href="/projects.html" className="skip-link">
+      <a href={assetUrl("projects.html")} className="skip-link">
         Passer à la version sans 3D
       </a>
       <div
@@ -139,7 +140,7 @@ export const App = () => {
           fallback={
             <div className="canvas-fallback">
               La 3D n’a pas pu démarrer.{" "}
-              <a href="/projects.html">Lire le carnet de voyage ↗</a>
+              <a href={assetUrl("projects.html")}>Lire le carnet de voyage ↗</a>
             </div>
           }
         >
@@ -172,7 +173,7 @@ export const App = () => {
           ) : (
             <div className="canvas-fallback">
               La 3D n’a pas pu démarrer.{" "}
-              <a href="/projects.html">Lire le carnet de voyage ↗</a>
+              <a href={assetUrl("projects.html")}>Lire le carnet de voyage ↗</a>
             </div>
           )}
         </ErrorBoundary>
@@ -205,7 +206,7 @@ export const App = () => {
         </button>
       </div>
       <header className="topbar">
-        <a href="/" className="brand" aria-label="Zeppelin Journey, accueil">
+        <a href={assetUrl()} className="brand" aria-label="Zeppelin Journey, accueil">
           <span className="brand-mark">✣</span>
           <span>
             ZEPPELIN<span className="brand-sub">JOURNEY</span>
@@ -441,7 +442,7 @@ export const App = () => {
               ? "Manette connectée"
               : "Sur mobile, utilisez les flèches à l’écran ou choisissez une traversée guidée."}
           </p>
-          <a href="/projects.html">Lire le carnet sans 3D ↗</a>
+          <a href={assetUrl("projects.html")}>Lire le carnet sans 3D ↗</a>
         </section>
       )}
       <Conversation

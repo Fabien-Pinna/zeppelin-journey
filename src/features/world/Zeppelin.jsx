@@ -1,10 +1,11 @@
+import { assetUrl } from "../../assetUrl.js";
 import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 /** Reworked passenger airship, sharing the dioramas' materials. */
 export const Zeppelin = ({ flying, reduced, simulation }) => {
   const ref = useRef();
-  const { scene } = useGLTF("/models/world-v2/zeppelin.glb");
+  const { scene } = useGLTF(assetUrl("models/world-v2/zeppelin.glb"));
   const model = useMemo(() => {
     const copy = scene.clone(true);
     copy.traverse((o) => {

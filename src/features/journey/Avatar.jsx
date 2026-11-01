@@ -1,3 +1,4 @@
+import { assetUrl } from "../../assetUrl.js";
 import { useMemo } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
@@ -11,7 +12,7 @@ export const Avatar = ({
   simulation,
 }) => {
   const { scene } = useGLTF(
-    `/models/world-v2/${pose === "hang" || pose === "juggle" ? "acrobat" : "traveller"}.glb`,
+    assetUrl(`models/world-v2/${pose === "hang" || pose === "juggle" ? "acrobat" : "traveller"}.glb`),
   );
   const { model, joints } = useMemo(() => {
     const model = scene.clone(true),

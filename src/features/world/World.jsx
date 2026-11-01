@@ -1,3 +1,4 @@
+import { assetUrl } from "../../assetUrl.js";
 import { Suspense, useEffect, useState, useRef } from "react";
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import { useTexture, Environment, useProgress } from "@react-three/drei";
@@ -16,8 +17,8 @@ const Simulation = ({ simulation, paused, reduced }) => {
 };
 const Atmosphere = ({ night }) => {
   const skies = useTexture([
-    "/textures/cloud-sea.png",
-    "/textures/cloud-sea-evening.png",
+    assetUrl("textures/cloud-sea.png"),
+    assetUrl("textures/cloud-sea-evening.png"),
   ]);
   const sky = skies[night ? 1 : 0];
   const { scene, size } = useThree();

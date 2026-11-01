@@ -1,3 +1,4 @@
+import { assetUrl } from "../assetUrl.js";
 import { useEffect, useRef } from "react";
 import { exhibits, islands } from "../features/journey/world.js";
 
@@ -65,7 +66,7 @@ export const Journal = ({ selection, onClose, onTravel }) => {
             </article>
           );
         })}
-        <a className="plain-link" href="/projects.html">
+        <a className="plain-link" href={assetUrl("projects.html")}>
           Ouvrir la version sans 3D ↗
         </a>
       </div>

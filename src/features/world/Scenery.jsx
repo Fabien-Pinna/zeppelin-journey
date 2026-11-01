@@ -1,8 +1,9 @@
+import { assetUrl } from "../../assetUrl.js";
 import { useMemo } from "react";
 import { Html, useGLTF } from "@react-three/drei";
 import { islands } from "../journey/world.js";
 import { Activity, Guide, useScenicMotion } from "./Life.jsx";
-useGLTF.setDecoderPath("/draco/");
+useGLTF.setDecoderPath(assetUrl("draco/"));
 const Diorama = ({
   island,
   onExhibit,
@@ -12,7 +13,7 @@ const Diorama = ({
   alive,
   simulation,
 }) => {
-  const { scene } = useGLTF(`/models/world-v2/${island.id}.glb`);
+  const { scene } = useGLTF(assetUrl(`models/world-v2/${island.id}.glb`));
   const model = useMemo(() => {
     const copy = scene.clone(true);
     copy.traverse((o) => {

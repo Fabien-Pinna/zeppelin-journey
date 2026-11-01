@@ -34,3 +34,10 @@ Nine detailed Blender dioramas cover development, warehouse work, masonry, agric
 Walking uses a collider manifest exported from the same Blender geometry: walls, furniture, posts, crates and other solid props. Substepped movement slides along obstacles, with gravity, jumping and an island boundary. This is lightweight kinematic physics, not a rigid-body destruction simulation.
 
 See [implementation notes](docs/implementation.md) for boundaries, content provenance and remaining work. The GitHub repository is private. Sites publication uses `.openai/hosting.json` and the Sites source workflow; GitHub pushes alone do not currently publish the Site.
+
+
+## GitHub Pages
+
+The existing repository is `Fabien-Pinna/zeppelin-journey`. `.github/workflows/pages.yml` runs the tests, builds the static site and publishes `dist` on pushes to `main` or a manual workflow dispatch. Enable Pages with GitHub Actions as its source; the repository must be eligible for Pages under the account's plan.
+
+`PAGES_BASE_PATH=/zeppelin-journey/` selects the Pages project subdirectory. Without that environment variable, builds keep the root path used by the existing Sites host. Public assets, Draco decoder and navigation use Vite's deployment base; the standalone journal links back relatively. No deployment token secret is required by the Pages workflow.

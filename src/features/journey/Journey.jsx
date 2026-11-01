@@ -4,7 +4,7 @@ import * as THREE from "three";
 import { Avatar } from "./Avatar.jsx";
 import { Zeppelin } from "../world/Zeppelin.jsx";
 import { flightCameraOffset } from "./flight.js";
-import { clampWalkPitch, walkingCameraOffset } from './camera.js';
+import { cameraObjectFraction, clampWalkPitch, createWalkingFollow, stepWalkingFollow, walkingCameraOffset, walkingDirection } from './camera.js';
 import {
   moveWalker,
   deadZone,
@@ -43,6 +43,7 @@ export const Journey = ({
   const motion = useRef({ speed: 0 });
   const vertical = useRef({ velocity: 0, jumpHeld: false });
   const flightOrbit = useRef({ previous: 0, idle: 0 });
+  const walkingFollow = useRef(createWalkingFollow());
   const heading = useRef(0),
     timer = useRef(0),
     gamepadAction = useRef(false);
@@ -53,11 +54,17 @@ export const Journey = ({
       smoothLook: new THREE.Vector3(-6, 2, -13),
       target: new THREE.Vector3(),
       forward: new THREE.Vector3(),
+      raycaster: new THREE.Raycaster(),
+      hits: [],
     }),
     [],
   );
   const island = islands.find((item) => item.id === islandId);
   useEffect(() => {
+    if (mode === 'walking') {
+      input.current.orbit = avatar.current.rotation.y + Math.PI;
+      walkingFollow.current = createWalkingFollow(input.current.lookVersion, input.current.recenterVersion);
+    }
     if (mode === "takeoff") {
       input.current.orbit = 0;
       flightOrbit.current = { previous: 0, idle: 0 };
@@ -104,19 +111,21 @@ export const Journey = ({
     const action = pad?.buttons[0]?.pressed || false;
     if (action && !gamepadAction.current && !paused) actionRef.current?.();
     gamepadAction.current = action;
-    if (!paused) input.current.orbit += deadZone(pad?.axes[2] || 0) * dt * 1.5;
+    const lookX = deadZone(pad?.axes[2] || 0);
+    const lookY = deadZone(pad?.axes[3] || 0);
+    if (!paused) {
+      input.current.orbit += lookX * dt * 1.5;
+      if (lookX || (mode === 'walking' && lookY)) input.current.lookVersion += 1;
+    }
     if (!paused && mode === 'walking')
-      input.current.pitch = clampWalkPitch(input.current.pitch - deadZone(pad?.axes[3] || 0) * dt * 1.1);
+      input.current.pitch = clampWalkPitch(input.current.pitch - lookY * dt * 1.1);
     if (paused) {
       x = 0;
       y = 0;
     }
 
     if (mode === "walking" && !paused) {
-      const angle = input.current.orbit;
-      const length = Math.max(1, Math.hypot(x, y));
-      const dx = (x * Math.cos(angle) - y * Math.sin(angle)) / length;
-      const dz = (-y * Math.cos(angle) - x * Math.sin(angle)) / length;
+      const [dx, dz] = walkingDirection(walkingFollow.current, x, y, input.current.orbit);
       const speed = has("ShiftLeft", "ShiftRight") ? 5.6 : 3.2;
       const feet = walker.current.y - island.position[1];
       const [nx, nz] = moveWalker(
@@ -244,6 +253,10 @@ export const Journey = ({
         camera.aspect < 1 ? 0 : -13,
       );
     } else if (mode === "walking") {
+      input.current.orbit = stepWalkingFollow(
+        walkingFollow.current, input.current.orbit, avatar.current.rotation.y,
+        input.current.lookVersion, input.current.recenterVersion, paused ? 0 : dt,
+      );
       vectors.look.copy(walker.current).add(vectors.target.set(0, 1.3, 0));
       vectors.camera.copy(vectors.look).add(
         vectors.target.set(...walkingCameraOffset(input.current.orbit, input.current.pitch)),
@@ -265,17 +278,25 @@ export const Journey = ({
     const zoom = clampZoom(input.current.zoom);
     vectors.camera.sub(vectors.look).multiplyScalar(zoom).add(vectors.look);
     if (mode === "walking") {
-      const fraction = cameraFraction(
+      const fraction = Math.min(cameraFraction(
         vectors.look.toArray(),
         vectors.camera.toArray(),
         island,
-      );
+      ), cameraObjectFraction(vectors.look, vectors.camera, ship.current, vectors.raycaster, vectors.hits));
       vectors.camera
         .sub(vectors.look)
         .multiplyScalar(fraction)
         .add(vectors.look);
     }
     camera.position.lerp(vectors.camera, reduced ? 1 : 1 - Math.exp(-3 * dt));
+    if (mode === 'walking') {
+      // Damping can otherwise sweep the actual camera through an obstacle during a turn.
+      const fraction = Math.min(
+        cameraFraction(vectors.look.toArray(), camera.position.toArray(), island),
+        cameraObjectFraction(vectors.look, camera.position, ship.current, vectors.raycaster, vectors.hits),
+      );
+      camera.position.sub(vectors.look).multiplyScalar(fraction).add(vectors.look);
+    }
     vectors.smoothLook.lerp(vectors.look, reduced ? 1 : 1 - Math.exp(-5 * dt));
     camera.lookAt(vectors.smoothLook);
     timer.current += dt;
@@ -304,7 +325,7 @@ export const Journey = ({
   });
   return (
     <>
-      <group ref={avatar}>
+      <group ref={avatar} rotation={[0, Math.PI, 0]}>
         <Suspense fallback={null}>
           <Avatar
             motion={motion}

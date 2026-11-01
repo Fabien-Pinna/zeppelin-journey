@@ -8,6 +8,8 @@ export const useInput = (onAction, onTalk) => {
     keys: new Set(),
     touch: { x: 0, y: 0 },
     orbit: 0,
+    lookVersion: 0,
+    recenterVersion: 0,
     pitch: DEFAULT_WALK_PITCH,
     zoom: 1,
     jump: false,

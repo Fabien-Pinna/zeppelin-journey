@@ -111,6 +111,8 @@ export const App = () => {
       if (pinch.current && distance > 10) changeZoom(pinch.current / distance);
       pinch.current = distance;
     } else if (!intro) {
+      if (event.clientX !== previous[0] || event.clientY !== previous[1])
+        input.current.lookVersion += 1;
       input.current.orbit -= (event.clientX - previous[0]) * 0.006;
       if (mode === 'walking')
         input.current.pitch = clampWalkPitch(input.current.pitch - (event.clientY - previous[1]) * 0.0045);
@@ -195,10 +197,11 @@ export const App = () => {
           onClick={() => {
             input.current.zoom = 1;
             input.current.orbit = 0;
+            input.current.recenterVersion += 1;
             input.current.pitch = DEFAULT_WALK_PITCH;
           }}
           aria-label="Recentrer la caméra"
-          title="Vue initiale"
+          title="Revenir derrière le personnage ou le zeppelin"
         >
           ⌾
         </button>
@@ -423,7 +426,7 @@ export const App = () => {
             <dt>ZQSD / WASD / flèches</dt>
             <dd>Marcher · piloter</dd>
             <dt>Glisser la souris ou le doigt</dt>
-            <dd>Tourner la caméra · à pied, glisser verticalement pour l’incliner</dd>
+            <dd>Regarder autour · glisser verticalement pour incliner la vue à pied. La caméra revient derrière vous après une courte pause.</dd>
             <dt>Molette / + − / pincement</dt>
             <dd>Zoomer · dézoomer</dd>
             <dt>F</dt>
